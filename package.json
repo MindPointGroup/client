@@ -15,7 +15,8 @@
     "test": "node test.js"
   },
   "config": {
-    "org": "MindPointGroup"
+    "org": "MindPointGroup",
+    "pattern": "image-press-serverless"
   },
   "repository": {
     "type": "git",

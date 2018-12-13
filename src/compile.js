@@ -51,7 +51,7 @@ module.exports = args => {
     // include them in the namespace object.
     //
     def.paths.forEach(mapping => {
-      const version = getVersion(mapping.path, args.version)
+      const version = getVersion(mapping.path, def.basePath)
       nsobj[version] = {}
     })
 
@@ -64,7 +64,7 @@ module.exports = args => {
     def.paths.forEach(mapping => {
       mapping.path = mapping.path.replace(/\/$/, '')
 
-      const version = getVersion(mapping.path, args.version)
+      const version = getVersion(mapping.path, def.basePath)
       const name = toCamel(stripVersion(mapping.path))
       const p = mapping.path
       const method = (mapping.method || 'get').toLowerCase()

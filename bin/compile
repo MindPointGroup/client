@@ -1,6 +1,4 @@
 const debug = require('debug')
-const data = require('../src/data')
+const get = require('../src/get')
 
-module.exports = async args => {
-  data()
-}
+module.exports = async args => get()
