@@ -1,3 +1,5 @@
+const pkg = require('../package.json')
+
 function toCamel (s) {
   s = s.replace(/\//g, '-')
 
@@ -15,6 +17,16 @@ function stripVersion (s) {
   return s.replace(/^\/(v\d+)/, (_, v) => ``)
 }
 
+const header = `
+  const Fetch = require('fetch')
+  const { default: Amplify } = require('aws-amplify')
+
+  const fetch = new Fetch({
+    root: '${pkg.config.url}',
+    auth: Amplify.Auth
+  })
+`
+
 module.exports = args => {
   const {
     defs
@@ -28,7 +40,7 @@ module.exports = args => {
     `//`,
     `// DO NOT EDIT! GENERATED FILE!`,
     `//`,
-    `const fetch = require('fetch')`,
+    header,
     `const api = module.exports = {}`
   ]
 

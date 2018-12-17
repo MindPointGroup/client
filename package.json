@@ -16,7 +16,8 @@
   },
   "config": {
     "org": "MindPointGroup",
-    "pattern": "image-press-serverless"
+    "pattern": "image-press-serverless",
+    "url": "https://api.dev.imgpress.io"
   },
   "repository": {
     "type": "git",
