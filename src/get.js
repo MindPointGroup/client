@@ -109,6 +109,8 @@ module.exports = async (args = {}) => {
       continue
     }
 
+    def.name = repo.name
+
     defs.push(def)
   }
 
