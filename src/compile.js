@@ -117,8 +117,9 @@ module.exports = args => {
       const name = toCamel(stripVersion(mapping.path))
       const p = mapping.path
       const method = (mapping.method || 'get').toLowerCase()
+      const httpMethod = method.toUpperCase()
 
-      docstext.push(`## ${method.toUpperCase()} /${def.basePath}${p}`)
+      docstext.push(`## ${httpMethod} /${def.basePath}${p}`)
 
       const chain = `${ns}.${version}.${method}${name}`
       const validator = []
@@ -127,7 +128,7 @@ module.exports = args => {
         validator.push(
           ``,
           `  // Validation`,
-          `  const p = { body, path, method: '${method}' }`,
+          `  const p = { body, path, method: '${httpMethod}' }`,
           `  const { err } = await validators['${mapping.function}'](p)`,
           `  if (err) return { err }`,
           ``
@@ -142,7 +143,7 @@ module.exports = args => {
 
         `  // Request`,
         `  const params = {`,
-        `    method: '${method}',`,
+        `    method: '${httpMethod}',`,
         `    body`,
         `  }`,
         ``,
