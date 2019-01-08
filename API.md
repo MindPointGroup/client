@@ -24,10 +24,22 @@ const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({})
 const { res, err, data } = await api.imagepress.v0.getBaselineList({})
 ```
 
-## GET /v0/baseline/status
+## GET /v0/baseline/bake/status
 
 ```js
-const { res, err, data } = await api.imagepress.v0.getBaselineStatus({})
+const { res, err, data } = await api.imagepress.v0.getBaselineBakeStatus({})
+```
+
+## POST /v0/baseline/distribute
+
+```js
+const { res, err, data } = await api.imagepress.v0.postBaselineDistribute({})
+```
+
+## GET /v0/baseline/distribute/status
+
+```js
+const { res, err, data } = await api.imagepress.v0.getBaselineDistributeStatus({})
 ```
 
 ## GET /v0/bucket/list
@@ -90,40 +102,10 @@ const { res, err, data } = await api.imagepress.v0.getImage({})
 const { res, err, data } = await api.imagepress.v0.postImage({})
 ```
 
-## DELETE /v0/image
-
-```js
-const { res, err, data } = await api.imagepress.v0.deleteImage({})
-```
-
 ## POST /v0/image/attrs
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postImageAttrs({})
-```
-
-## POST /v0/image/copy
-
-```js
-const { res, err, data } = await api.imagepress.v0.postImageCopy({})
-```
-
-## GET /v0/image/copy/status
-
-```js
-const { res, err, data } = await api.imagepress.v0.getImageCopyStatus({})
-```
-
-## POST /v0/image/import
-
-```js
-const { res, err, data } = await api.imagepress.v0.postImageImport({})
-```
-
-## POST /v0/image/import/status
-
-```js
-const { res, err, data } = await api.imagepress.v0.postImageImportStatus({})
 ```
 
 ## POST /v0/image/tagger
@@ -166,4 +148,40 @@ const { res, err, data } = await api.imagepress.v0.getRepo({})
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postRepo({})
+```
+
+## GET /v0/sources
+
+```js
+const { res, err, data } = await api.imagepress.v0.getSources({})
+```
+
+## GET /v0/source
+
+```js
+const { res, err, data } = await api.imagepress.v0.getSource({})
+```
+
+## POST /v0/source
+
+```js
+const { res, err, data } = await api.imagepress.v0.postSource({})
+```
+
+## DELETE /v0/source
+
+```js
+const { res, err, data } = await api.imagepress.v0.deleteSource({})
+```
+
+## PUT /v0/source
+
+```js
+const { res, err, data } = await api.imagepress.v0.putSource({})
+```
+
+## POST /v0/source/status
+
+```js
+const { res, err, data } = await api.imagepress.v0.postSourceStatus({})
 ```
