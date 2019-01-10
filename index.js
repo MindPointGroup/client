@@ -163,29 +163,24 @@ validators['baseline_bake_status'] = async ({ path, method, body }) => {
     userid: body.userid,
     noop: body.noop // do not send an sqs messages
   }
-  const debug = Debug.extend(body.userid)
+
   if (!data.id) {
-    debug('request without "id" made')
     return { err: { id: 'Property required' } }
   }
 
   if (!data.arn) {
-    debug('request without "public" made')
     return { err: { public: 'Property required' } }
   }
 
   if (!data.eid) {
-    debug('request without "eid" made')
     return { err: { private: 'Property required' } }
   }
 
   if (!data.region) {
-    debug('request without "region" made')
     return { err: { region: 'Property required' } }
   }
 
   if (!data.imageId) {
-    debug('request without "imageId" made')
     return { err: { imageId: 'Property required' } }
   }
 
@@ -674,14 +669,16 @@ validators['repo_upload'] = async ({ path, method, body }) => {
     return { err: { private: 'Property required' } }
   }
 
-  return { data: {
+  const data = {
     arn,
     eid,
     region,
     tarArchive,
     zipArchive,
     name: body.repoUrl.split(/[^\w\s]/gi).join('')
-  }}
+  }
+
+  return { data }
 }
 
 validators['repo_worker'] = async ({ path, method, body, req }) => {
