@@ -119,7 +119,7 @@ module.exports = async (args = {}) => {
     fs.writeFileSync(`${__dirname}/../index.js`, source)
     fs.writeFileSync(`${__dirname}/../API.md`, docs)
   } catch (err) {
-    console.log(`  ERR │ Unable to write (${err.message})`)
+    console.log(`  ERR │ Unable to write (${err.message})`, err.stack)
   }
 
   return { data: { defs, repos } }

@@ -170,16 +170,31 @@ module.exports = async args => {
       // Turn the error object into a literal to demo the method signature
       //
       const id = [mapping.method, mapping.function, mapping.path].join('/')
-      let sig = validators[id] || ''
+      let sig = []
 
-      if (sig) {
-        sig = JSON.stringify(validators[id], 2, 2)
+      if (validators[id]) {
+        sig = ['{']
+
+        for (const [prop, rule] of Object.entries(validators[id])) {
+          const rules = ['{']
+
+          if (typeof rule === 'object') {
+            for (const [k, v] of Object.entries(rule)) {
+              rules.push(`    ${k}: ${v.toString()}`)
+            }
+          }
+
+          rules.push('  },')
+          sig.push(`  ${prop}: ${rules.join('\n')}`)
+        }
+
+        sig.push('}')
       }
 
       docstext.push(
         ``,
         `\`\`\`js`,
-        `const { res, err, data } = await ${chain}(${sig})`,
+        `const { res, err, data } = await ${chain}(${sig.join('\n')})`,
         `\`\`\``,
         ``
       )

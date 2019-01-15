@@ -4,31 +4,32 @@
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postBaselineBake({
-  "instanceId": {
-    "type": "String",
-    "required": true
+  instanceId: {
+    type: String
+    required: true
   },
-  "imageName": {
-    "type": "String",
-    "required": true
+  imageName: {
+    type: String
+    required: true
   },
-  "imageId": {
-    "type": "String",
-    "required": true
+  imageId: {
+    type: String
+    required: true
   },
-  "region": {
-    "type": "String",
-    "required": true
+  region: {
+    type: String
+    required: true
   },
-  "noop": {},
-  "public": {
-    "type": "String",
-    "required": true
+  noop: {
   },
-  "private": {
-    "type": "String",
-    "required": true
-  }
+  public: {
+    type: String
+    required: true
+  },
+  private: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -36,37 +37,37 @@ const { res, err, data } = await api.imagepress.v0.postBaselineBake({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postBaselineComplete({
-  "noop": {
-    "type": "Function"
+  noop: {
+    type: Function
   },
-  "public": {
-    "type": "Stirng",
-    "required": true
+  public: {
+    type: Stirng
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
+  private: {
+    type: String
+    required: true
   },
-  "status": {
-    "type": "String",
-    "required": true
+  status: {
+    type: String
+    required: true
   },
-  "instanceId": {
-    "type": "String",
-    "required": true
+  instanceId: {
+    type: String
+    required: true
   },
-  "region": {
-    "type": "String",
-    "required": true
+  region: {
+    type: String
+    required: true
   },
-  "name": {
-    "type": "String",
-    "required": true
+  name: {
+    type: String
+    required: true
   },
-  "id": {
-    "type": "String",
-    "required": true
-  }
+  id: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -74,95 +75,96 @@ const { res, err, data } = await api.imagepress.v0.postBaselineComplete({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({
-  "name": {
-    "type": "String",
-    "required": true
+  name: {
+    type: String
+    required: true
   },
-  "cloudcredentialid": {
-    "type": "String",
-    "required": true
+  cloudcredentialid: {
+    type: String
+    required: true
   },
-  "reposList": {
-    "type": "String",
-    "required": true
+  reposList: {
+    type: String
+    required: true
   },
-  "subnetId": {
-    "type": "String",
-    "required": true
+  subnetId: {
+    type: String
+    required: true
   },
-  "imageId": {
-    "type": "String",
-    "required": true
+  imageId: {
+    type: String
+    required: true
   },
-  "region": {
-    "type": "String",
-    "required": true
+  region: {
+    type: String
+    required: true
   },
-  "assignIp": {
-    "type": "Boolean",
-    "default": true
+  assignIp: {
+    type: Boolean
+    default: true
   },
-  "platform": {
-    "type": "String"
+  platform: {
+    type: String
   },
-  "deviceName": {
-    "type": "String",
-    "default": "/dev/xvda"
+  deviceName: {
+    type: String
+    default: /dev/xvda
   },
-  "instanceType": {
-    "type": "String",
-    "default": "t2.medium"
+  instanceType: {
+    type: String
+    default: t2.medium
   },
-  "volumeSize": {
-    "type": "Number",
-    "default": 50
+  volumeSize: {
+    type: Number
+    default: 50
   },
-  "volumeType": {
-    "type": "String",
-    "default": "gp2"
+  volumeType: {
+    type: String
+    default: gp2
   },
-  "tags": {
-    "type": "Array"
-  }
+  tags: {
+    type: Array
+  },
 })
 ```
 
 ## GET /v0/baseline/list
 
 ```js
-const { res, err, data } = await api.imagepress.v0.getBaselineList({})
+const { res, err, data } = await api.imagepress.v0.getBaselineList({
+})
 ```
 
 ## GET /v0/baseline/bake/status
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBaselineBakeStatus({
-  "imageId": {
-    "type": "String",
-    "required": true
+  imageId: {
+    type: String
+    required: true
   },
-  "region": {
-    "type": "String",
-    "required": true
+  region: {
+    type: String
+    required: true
   },
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
+  private: {
+    type: String
+    required: true
   },
-  "id": {
-    "type": "String",
-    "required": true
+  id: {
+    type: String
+    required: true
   },
-  "userid": {
-    "type": "String"
+  userid: {
+    type: String
   },
-  "noop": {
-    "type": "Function"
-  }
+  noop: {
+    type: Function
+  },
 })
 ```
 
@@ -170,29 +172,29 @@ const { res, err, data } = await api.imagepress.v0.getBaselineBakeStatus({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postBaselineDistribute({
-  "id": {
-    "type": "String",
-    "required": true
+  id: {
+    type: String
+    required: true
   },
-  "sourceRegion": {
-    "type": "String",
-    "required": true
+  sourceRegion: {
+    type: String
+    required: true
   },
-  "regions": {
-    "type": "Array"
+  regions: {
+    type: Array
   },
-  "sourceImage": {
-    "type": "String",
-    "required": true
+  sourceImage: {
+    type: String
+    required: true
   },
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
-  }
+  private: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -200,22 +202,22 @@ const { res, err, data } = await api.imagepress.v0.postBaselineDistribute({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBaselineDistributeStatus({
-  "imageId": {
-    "type": "String",
-    "required": true
+  imageId: {
+    type: String
+    required: true
   },
-  "region": {
-    "type": "String",
-    "required": true
+  region: {
+    type: String
+    required: true
   },
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
-  }
+  private: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -223,14 +225,14 @@ const { res, err, data } = await api.imagepress.v0.getBaselineDistributeStatus({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBucketList({
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
-  }
+  private: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -238,22 +240,22 @@ const { res, err, data } = await api.imagepress.v0.getBucketList({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBucketObjects({
-  "bucket": {
-    "type": "String",
-    "required": true
+  bucket: {
+    type: String
+    required: true
   },
-  "region": {
-    "type": "String",
-    "required": true
+  region: {
+    type: String
+    required: true
   },
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
-  }
+  private: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -261,18 +263,18 @@ const { res, err, data } = await api.imagepress.v0.getBucketObjects({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBucketRegion({
-  "bucket": {
-    "type": "String",
-    "required": true
+  bucket: {
+    type: String
+    required: true
   },
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
-  }
+  private: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -280,14 +282,14 @@ const { res, err, data } = await api.imagepress.v0.getBucketRegion({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBucketRegions({
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
-  }
+  private: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -295,43 +297,46 @@ const { res, err, data } = await api.imagepress.v0.getBucketRegions({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.deleteCredentials({
-  "id": {
-    "type": "String",
-    "required": true
-  }
+  id: {
+    type: String
+    required: true
+  },
 })
 ```
 
 ## GET /v0/credentials
 
 ```js
-const { res, err, data } = await api.imagepress.v0.getCredentials({})
+const { res, err, data } = await api.imagepress.v0.getCredentials({
+})
 ```
 
 ## POST /v0/credentials/aws
 
 ```js
-const { res, err, data } = await api.imagepress.v0.postCredentialsAws({})
+const { res, err, data } = await api.imagepress.v0.postCredentialsAws({
+})
 ```
 
 ## POST /v0/credentials/git
 
 ```js
-const { res, err, data } = await api.imagepress.v0.postCredentialsGit({})
+const { res, err, data } = await api.imagepress.v0.postCredentialsGit({
+})
 ```
 
 ## POST /v0/credentials/verify
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postCredentialsVerify({
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
-  }
+  private: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -339,30 +344,30 @@ const { res, err, data } = await api.imagepress.v0.postCredentialsVerify({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getImage({
-  "id": {
-    "type": "String",
-    "required": true
+  id: {
+    type: String
+    required: true
   },
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
+  private: {
+    type: String
+    required: true
   },
-  "name": {
-    "type": "String",
-    "required": true
+  name: {
+    type: String
+    required: true
   },
-  "description": {
-    "type": "String",
-    "required": true
+  description: {
+    type: String
+    required: true
   },
-  "tags": {
-    "type": "String",
-    "required": true
-  }
+  tags: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -370,30 +375,30 @@ const { res, err, data } = await api.imagepress.v0.getImage({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postImage({
-  "id": {
-    "type": "String",
-    "required": true
+  id: {
+    type: String
+    required: true
   },
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
+  private: {
+    type: String
+    required: true
   },
-  "name": {
-    "type": "String",
-    "required": true
+  name: {
+    type: String
+    required: true
   },
-  "description": {
-    "type": "String",
-    "required": true
+  description: {
+    type: String
+    required: true
   },
-  "tags": {
-    "type": "String",
-    "required": true
-  }
+  tags: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -401,21 +406,21 @@ const { res, err, data } = await api.imagepress.v0.postImage({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postImageAttrs({
-  "imageId": {
-    "type": "String",
-    "required": true
+  imageId: {
+    type: String
+    required: true
   },
-  "makePublic": {
-    "type": "Boolean"
+  makePublic: {
+    type: Boolean
   },
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
-  }
+  private: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -423,26 +428,26 @@ const { res, err, data } = await api.imagepress.v0.postImageAttrs({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postImageTagger({
-  "imageId": {
-    "type": "String",
-    "required": true
+  imageId: {
+    type: String
+    required: true
   },
-  "tags": {
-    "type": "Array",
-    "required": true
+  tags: {
+    type: Array
+    required: true
   },
-  "region": {
-    "type": "String",
-    "required": true
+  region: {
+    type: String
+    required: true
   },
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
-  }
+  private: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -450,22 +455,22 @@ const { res, err, data } = await api.imagepress.v0.postImageTagger({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getImageVerify({
-  "id": {
-    "type": "String",
-    "required": true
+  id: {
+    type: String
+    required: true
   },
-  "region": {
-    "type": "String",
-    "required": true
+  region: {
+    type: String
+    required: true
   },
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
-  }
+  private: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -479,35 +484,35 @@ const { res, err, data } = await api.imagepress.v0.getRepoDownload()
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postRepoUpload({
-  "repoUrl": {
-    "type": "String",
-    "required": true
+  repoUrl: {
+    type: String
+    required: true
   },
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
+  private: {
+    type: String
+    required: true
   },
-  "region": {
-    "type": "String",
-    "required": true,
-    "match": {}
+  region: {
+    type: String
+    required: true
+    match: /ap-south-1|eu-west-3|eu-west-2|eu-west-1|ap-northeast-2|ap-northeast-1|sa-east-1|ca-central-1|ap-southeast-1|ap-southeast-2|eu-central-1|us-east-1|us-east-2|us-west-1|us-west-2/
   },
-  "tarArchive": {
-    "type": "String",
-    "required": true
+  tarArchive: {
+    type: String
+    required: true
   },
-  "zipArchive": {
-    "type": "String",
-    "required": true
+  zipArchive: {
+    type: String
+    required: true
   },
-  "repoBranch": {
-    "type": "String",
-    "required": true
-  }
+  repoBranch: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -521,27 +526,36 @@ const { res, err, data } = await api.imagepress.v0.postRepoWorker()
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getRepo({
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
+  private: {
+    type: String
+    required: true
   },
-  "url": {
-    "type": "String"
+  url: {
+    type: String
   },
-  "name": {
-    "type": "String"
+  name: {
+    type: String
   },
-  "fileList": {
-    "type": "Array"
+  fileList: {
+    type: Array
   },
-  "status": {
-    "type": "String"
+  assignIp: {
   },
-  "noWorker": false
+  subnetId: {
+  },
+  branch: {
+  },
+  status: {
+    type: String
+  },
+  credentialid: {
+  },
+  noWorker: {
+  },
 })
 ```
 
@@ -549,50 +563,59 @@ const { res, err, data } = await api.imagepress.v0.getRepo({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postRepo({
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
+  private: {
+    type: String
+    required: true
   },
-  "url": {
-    "type": "String",
-    "required": true
+  url: {
+    type: String
+    required: true
   },
-  "name": {
-    "type": "String",
-    "required": true
+  name: {
+    type: String
+    required: true
   },
-  "fileList": {
-    "type": "Array",
-    "required": true
+  fileList: {
+    type: Array
+    required: true
   },
-  "status": {
-    "type": "String",
-    "required": true
+  assignIp: {
   },
-  "noWorker": {
-    "type": "Boolean"
-  }
+  subnetId: {
+  },
+  branch: {
+  },
+  status: {
+    type: String
+    required: true
+  },
+  credentialid: {
+  },
+  noWorker: {
+    type: Boolean
+  },
 })
 ```
 
 ## GET /v0/sources
 
 ```js
-const { res, err, data } = await api.imagepress.v0.getSources({})
+const { res, err, data } = await api.imagepress.v0.getSources({
+})
 ```
 
 ## GET /v0/source
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getSource({
-  "id": {
-    "type": "String",
-    "required": true
-  }
+  id: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -600,45 +623,45 @@ const { res, err, data } = await api.imagepress.v0.getSource({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postSource({
-  "name": {
-    "type": "String",
-    "required": true
+  name: {
+    type: String
+    required: true
   },
-  "public": {
-    "type": "String",
-    "required": true
+  public: {
+    type: String
+    required: true
   },
-  "private": {
-    "type": "String",
-    "required": true
+  private: {
+    type: String
+    required: true
   },
-  "region": {
-    "type": "String"
+  region: {
+    type: String
   },
-  "imageId": {
-    "type": "String",
-    "required": true
+  imageId: {
+    type: String
+    required: true
   },
-  "tags": {
-    "type": "Array"
+  tags: {
+    type: Array
   },
-  "accounts": {
-    "type": "Array"
+  accounts: {
+    type: Array
   },
-  "type": {
-    "type": "String",
-    "required": true,
-    "match": {}
+  type: {
+    type: String
+    required: true
+    match: /s3|ami/
   },
-  "description": {
-    "type": "String"
+  description: {
+    type: String
   },
-  "provider": {
-    "type": "String"
+  provider: {
+    type: String
   },
-  "makePublic": {
-    "type": "Boolean"
-  }
+  makePublic: {
+    type: Boolean
+  },
 })
 ```
 
@@ -646,10 +669,11 @@ const { res, err, data } = await api.imagepress.v0.postSource({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.deleteSource({
-  "id": {
-    "type": "String",
-    "required": true
-  }
+  id: {
+    type: String
+    required: true
+    resolve: value => value.length <= 128
+  },
 })
 ```
 
