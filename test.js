@@ -27,7 +27,7 @@ test('successfully create api', async t => {
   t.ok(!err)
 
   try {
-    const api = require('.')
+    const api = await require('.')
 
     //
     // There should be as many endpoints properly collected

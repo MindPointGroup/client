@@ -115,7 +115,7 @@ module.exports = async (args = {}) => {
   }
 
   try {
-    const { source, docs } = compile({ defs })
+    const { source, docs } = await compile({ defs })
     fs.writeFileSync(`${__dirname}/../index.js`, source)
     fs.writeFileSync(`${__dirname}/../API.md`, docs)
   } catch (err) {

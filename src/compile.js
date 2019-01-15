@@ -20,6 +20,7 @@ function stripVersion (s) {
 
 const header = `
 const Fetch = require('fetch')
+const validateProps = require('./validate-props')
 const { default: Amplify } = require('aws-amplify')
 
 const fetch = new Fetch({
@@ -28,7 +29,7 @@ const fetch = new Fetch({
 })
 `
 
-module.exports = args => {
+module.exports = async args => {
   const {
     defs
   } = args
@@ -71,7 +72,7 @@ module.exports = args => {
     // Ensure that if there are individual versions, we
     // include them in the namespace object.
     //
-    def.paths.forEach(mapping => {
+    for (const mapping of def.paths) {
       const version = getVersion(mapping.path, def.basePath)
       nsobj[version] = {}
 
@@ -81,6 +82,8 @@ module.exports = args => {
       // Check if there is a validator for this lambda function,
       // if there is cache it, we will call it in the source text.
       //
+      let sig = {}
+
       if (!validators[fn]) {
         const p = path.join(
           __dirname,
@@ -94,15 +97,26 @@ module.exports = args => {
 
         try {
           const validator = require(p)
+
+          const mock = {
+            body: {},
+            mock: true,
+            path: mapping.path,
+            method: mapping.method
+          }
+
+          const { data } = await validator(mock)
+          sig = data
           sourcetext.push(`validators['${fn}'] = ${validator.toString()}`, '')
         } catch (err) {
           console.log(` WARN │ Unable to parse validator for ${fn}`)
-          return
+          continue
         }
 
-        validators[fn] = true
+        const id = [mapping.method, fn, mapping.path].join('/')
+        validators[id] = sig || ''
       }
-    })
+    }
 
     const o = JSON.stringify(nsobj, 2, 2).replace(/"/g, '\'')
     sourcetext.push(`${ns} = ${o}`, '')
@@ -152,10 +166,20 @@ module.exports = args => {
         ``
       ].join('\n'))
 
+      //
+      // Turn the error object into a literal to demo the method signature
+      //
+      const id = [mapping.method, mapping.function, mapping.path].join('/')
+      let sig = validators[id] || ''
+
+      if (sig) {
+        sig = JSON.stringify(validators[id], 2, 2)
+      }
+
       docstext.push(
         ``,
         `\`\`\`js`,
-        `const { res, err, data } = await ${chain}({})`,
+        `const { res, err, data } = await ${chain}(${sig})`,
         `\`\`\``,
         ``
       )
