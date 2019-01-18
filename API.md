@@ -1,7 +1,7 @@
 # imagepress
 
-### baseline
-## POST /v0/baseline/complete
+## baseline
+### POST /v0/baseline/complete
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postBaselineComplete({
@@ -40,7 +40,7 @@ const { res, err, data } = await api.imagepress.v0.postBaselineComplete({
 })
 ```
 
-## POST /v0/baseline/launch
+### POST /v0/baseline/launch
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({
@@ -97,14 +97,14 @@ const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({
 })
 ```
 
-## GET /v0/baseline/list
+### GET /v0/baseline/list
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBaselineList({
 })
 ```
 
-## GET /v0/baseline/bake/status
+### GET /v0/baseline/bake/status
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBaselineBakeStatus({
@@ -139,7 +139,7 @@ const { res, err, data } = await api.imagepress.v0.getBaselineBakeStatus({
 })
 ```
 
-## POST /v0/baseline/distribute
+### POST /v0/baseline/distribute
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postBaselineDistribute({
@@ -170,7 +170,7 @@ const { res, err, data } = await api.imagepress.v0.postBaselineDistribute({
 })
 ```
 
-## GET /v0/baseline/distribute/status
+### GET /v0/baseline/distribute/status
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBaselineDistributeStatus({
@@ -193,7 +193,7 @@ const { res, err, data } = await api.imagepress.v0.getBaselineDistributeStatus({
 })
 ```
 
-## DELETE /v0/baseline/delete/copy
+### DELETE /v0/baseline/delete/copy
 
 ```js
 const { res, err, data } = await api.imagepress.v0.deleteBaselineDeleteCopy({
@@ -216,7 +216,7 @@ const { res, err, data } = await api.imagepress.v0.deleteBaselineDeleteCopy({
 })
 ```
 
-## DELETE /v0/baseline/delete/copies
+### DELETE /v0/baseline/delete/copies
 
 ```js
 const { res, err, data } = await api.imagepress.v0.deleteBaselineDeleteCopies({
@@ -235,7 +235,7 @@ const { res, err, data } = await api.imagepress.v0.deleteBaselineDeleteCopies({
 })
 ```
 
-## DELETE /v0/baseline/delete
+### DELETE /v0/baseline/delete
 
 ```js
 const { res, err, data } = await api.imagepress.v0.deleteBaselineDelete({
@@ -254,8 +254,8 @@ const { res, err, data } = await api.imagepress.v0.deleteBaselineDelete({
 })
 ```
 
-### bucket
-## GET /v0/bucket/list
+## bucket
+### GET /v0/bucket/list
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBucketList({
@@ -270,7 +270,7 @@ const { res, err, data } = await api.imagepress.v0.getBucketList({
 })
 ```
 
-## GET /v0/bucket/objects
+### GET /v0/bucket/objects
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBucketObjects({
@@ -293,7 +293,7 @@ const { res, err, data } = await api.imagepress.v0.getBucketObjects({
 })
 ```
 
-## GET /v0/bucket/region
+### GET /v0/bucket/region
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBucketRegion({
@@ -312,7 +312,7 @@ const { res, err, data } = await api.imagepress.v0.getBucketRegion({
 })
 ```
 
-## GET /v0/bucket/regions
+### GET /v0/bucket/regions
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBucketRegions({
@@ -327,8 +327,8 @@ const { res, err, data } = await api.imagepress.v0.getBucketRegions({
 })
 ```
 
-### credentials
-## DELETE /v0/credentials
+## credentials
+### DELETE /v0/credentials
 
 ```js
 const { res, err, data } = await api.imagepress.v0.deleteCredentials({
@@ -339,28 +339,28 @@ const { res, err, data } = await api.imagepress.v0.deleteCredentials({
 })
 ```
 
-## GET /v0/credentials
+### GET /v0/credentials
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getCredentials({
 })
 ```
 
-## POST /v0/credentials/aws
+### POST /v0/credentials/aws
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postCredentialsAws({
 })
 ```
 
-## POST /v0/credentials/git
+### POST /v0/credentials/git
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postCredentialsGit({
 })
 ```
 
-## POST /v0/credentials/verify
+### POST /v0/credentials/verify
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postCredentialsVerify({
@@ -375,8 +375,8 @@ const { res, err, data } = await api.imagepress.v0.postCredentialsVerify({
 })
 ```
 
-### image
-## POST /v0/image/attrs
+## image
+### POST /v0/image/attrs
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postImageAttrs({
@@ -398,7 +398,7 @@ const { res, err, data } = await api.imagepress.v0.postImageAttrs({
 })
 ```
 
-## POST /v0/image/tagger
+### POST /v0/image/tagger
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postImageTagger({
@@ -425,7 +425,7 @@ const { res, err, data } = await api.imagepress.v0.postImageTagger({
 })
 ```
 
-## GET /v0/image/verify
+### GET /v0/image/verify
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getImageVerify({
@@ -448,8 +448,8 @@ const { res, err, data } = await api.imagepress.v0.getImageVerify({
 })
 ```
 
-### repo
-## GET /v0/repo/download
+## repo
+### GET /v0/repo/download
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getRepoDownload({
@@ -481,7 +481,7 @@ const { res, err, data } = await api.imagepress.v0.getRepoDownload({
 })
 ```
 
-## POST /v0/repo/upload
+### POST /v0/repo/upload
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postRepoUpload({
@@ -517,20 +517,20 @@ const { res, err, data } = await api.imagepress.v0.postRepoUpload({
 })
 ```
 
-## POST /v0/repo/worker
+### POST /v0/repo/worker
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postRepoWorker()
 ```
 
-## GET /v0/repo/list
+### GET /v0/repo/list
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getRepoList({
 })
 ```
 
-## GET /v0/repo
+### GET /v0/repo
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getRepo({
@@ -575,7 +575,7 @@ const { res, err, data } = await api.imagepress.v0.getRepo({
 })
 ```
 
-## POST /v0/repo
+### POST /v0/repo
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postRepo({
@@ -623,7 +623,7 @@ const { res, err, data } = await api.imagepress.v0.postRepo({
 })
 ```
 
-## DELETE /v0/repo
+### DELETE /v0/repo
 
 ```js
 const { res, err, data } = await api.imagepress.v0.deleteRepo({
@@ -634,16 +634,16 @@ const { res, err, data } = await api.imagepress.v0.deleteRepo({
 })
 ```
 
-### sources
-## GET /v0/sources
+## sources
+### GET /v0/sources
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getSources({
 })
 ```
 
-### source
-## GET /v0/source
+## source
+### GET /v0/source
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getSource({
@@ -654,7 +654,7 @@ const { res, err, data } = await api.imagepress.v0.getSource({
 })
 ```
 
-## POST /v0/source
+### POST /v0/source
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postSource({
@@ -700,7 +700,7 @@ const { res, err, data } = await api.imagepress.v0.postSource({
 })
 ```
 
-## DELETE /v0/source
+### DELETE /v0/source
 
 ```js
 const { res, err, data } = await api.imagepress.v0.deleteSource({
@@ -712,13 +712,13 @@ const { res, err, data } = await api.imagepress.v0.deleteSource({
 })
 ```
 
-## PUT /v0/source
+### PUT /v0/source
 
 ```js
 const { res, err, data } = await api.imagepress.v0.putSource()
 ```
 
-## POST /v0/source/status
+### POST /v0/source/status
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postSourceStatus()

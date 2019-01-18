@@ -129,7 +129,7 @@ module.exports = async args => {
 
       if (lastSubsection !== subsection) {
         lastSubsection = subsection
-        docstext.push(`### ${subsection}`)
+        docstext.push(`## ${subsection}`)
       }
 
       mapping.path = mapping.path.replace(/\/$/, '')
@@ -140,7 +140,7 @@ module.exports = async args => {
       const method = (mapping.method || 'get').toLowerCase()
       const httpMethod = method.toUpperCase()
 
-      docstext.push(`## ${httpMethod} /${def.basePath}${p}`)
+      docstext.push(`### ${httpMethod} /${def.basePath}${p}`)
 
       const chain = `${ns}.${version}.${method}${name}`
       const validator = []
