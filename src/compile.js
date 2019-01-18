@@ -149,7 +149,7 @@ module.exports = async args => {
 
       sourcetext.push([
         `${chain} = async body => {`,
-        `  const path = '${mapping.path}'`,
+        `  const path = '${def.basePath}${mapping.path}'`,
 
         `${validator ? validator.join('\n') : ''}`,
 

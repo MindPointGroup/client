@@ -518,6 +518,13 @@ const { res, err, data } = await api.imagepress.v0.postRepoUpload({
 const { res, err, data } = await api.imagepress.v0.postRepoWorker()
 ```
 
+## GET /v0/repo/list
+
+```js
+const { res, err, data } = await api.imagepress.v0.getRepoList({
+})
+```
+
 ## GET /v0/repo
 
 ```js

@@ -403,6 +403,10 @@ validators['repo_upload'] = async ({ path, method, body, mock }) => {
   return validateProps(props, body, mock)
 }
 
+validators['repo_list'] = async ({ path, method, body, mock }) => {
+  return validateProps({}, body, mock)
+}
+
 validators['repo'] = async ({ path, method, body, mock }) => {
   const props = {
     public: { type: 'String', required: true },
@@ -622,7 +626,7 @@ api.imagepress = {
 }
 
 api.imagepress.v0.postBaselineComplete = async body => {
-  const path = '/baseline/complete'
+  const path = 'v0/baseline/complete'
 
   // Request
   const params = {
@@ -634,7 +638,7 @@ api.imagepress.v0.postBaselineComplete = async body => {
 }
 
 api.imagepress.v0.postBaselineLaunch = async body => {
-  const path = '/baseline/launch'
+  const path = 'v0/baseline/launch'
 
   // Request
   const params = {
@@ -646,7 +650,7 @@ api.imagepress.v0.postBaselineLaunch = async body => {
 }
 
 api.imagepress.v0.getBaselineList = async body => {
-  const path = '/baseline/list'
+  const path = 'v0/baseline/list'
 
   // Request
   const params = {
@@ -658,7 +662,7 @@ api.imagepress.v0.getBaselineList = async body => {
 }
 
 api.imagepress.v0.getBaselineBakeStatus = async body => {
-  const path = '/baseline/bake/status'
+  const path = 'v0/baseline/bake/status'
 
   // Request
   const params = {
@@ -670,7 +674,7 @@ api.imagepress.v0.getBaselineBakeStatus = async body => {
 }
 
 api.imagepress.v0.postBaselineDistribute = async body => {
-  const path = '/baseline/distribute'
+  const path = 'v0/baseline/distribute'
 
   // Request
   const params = {
@@ -682,7 +686,7 @@ api.imagepress.v0.postBaselineDistribute = async body => {
 }
 
 api.imagepress.v0.getBaselineDistributeStatus = async body => {
-  const path = '/baseline/distribute/status'
+  const path = 'v0/baseline/distribute/status'
 
   // Request
   const params = {
@@ -694,7 +698,7 @@ api.imagepress.v0.getBaselineDistributeStatus = async body => {
 }
 
 api.imagepress.v0.deleteBaselineDeleteCopy = async body => {
-  const path = '/baseline/delete/copy'
+  const path = 'v0/baseline/delete/copy'
 
   // Request
   const params = {
@@ -706,7 +710,7 @@ api.imagepress.v0.deleteBaselineDeleteCopy = async body => {
 }
 
 api.imagepress.v0.deleteBaselineDeleteCopies = async body => {
-  const path = '/baseline/delete/copies'
+  const path = 'v0/baseline/delete/copies'
 
   // Request
   const params = {
@@ -718,7 +722,7 @@ api.imagepress.v0.deleteBaselineDeleteCopies = async body => {
 }
 
 api.imagepress.v0.deleteBaselineDelete = async body => {
-  const path = '/baseline/delete'
+  const path = 'v0/baseline/delete'
 
   // Request
   const params = {
@@ -730,7 +734,7 @@ api.imagepress.v0.deleteBaselineDelete = async body => {
 }
 
 api.imagepress.v0.getBucketList = async body => {
-  const path = '/bucket/list'
+  const path = 'v0/bucket/list'
 
   // Request
   const params = {
@@ -742,7 +746,7 @@ api.imagepress.v0.getBucketList = async body => {
 }
 
 api.imagepress.v0.getBucketObjects = async body => {
-  const path = '/bucket/objects'
+  const path = 'v0/bucket/objects'
 
   // Request
   const params = {
@@ -754,7 +758,7 @@ api.imagepress.v0.getBucketObjects = async body => {
 }
 
 api.imagepress.v0.getBucketRegion = async body => {
-  const path = '/bucket/region'
+  const path = 'v0/bucket/region'
 
   // Request
   const params = {
@@ -766,7 +770,7 @@ api.imagepress.v0.getBucketRegion = async body => {
 }
 
 api.imagepress.v0.getBucketRegions = async body => {
-  const path = '/bucket/regions'
+  const path = 'v0/bucket/regions'
 
   // Request
   const params = {
@@ -778,7 +782,7 @@ api.imagepress.v0.getBucketRegions = async body => {
 }
 
 api.imagepress.v0.deleteCredentials = async body => {
-  const path = '/credentials'
+  const path = 'v0/credentials'
 
   // Request
   const params = {
@@ -790,7 +794,7 @@ api.imagepress.v0.deleteCredentials = async body => {
 }
 
 api.imagepress.v0.getCredentials = async body => {
-  const path = '/credentials'
+  const path = 'v0/credentials'
 
   // Request
   const params = {
@@ -802,7 +806,7 @@ api.imagepress.v0.getCredentials = async body => {
 }
 
 api.imagepress.v0.postCredentialsAws = async body => {
-  const path = '/credentials/aws'
+  const path = 'v0/credentials/aws'
 
   // Request
   const params = {
@@ -814,7 +818,7 @@ api.imagepress.v0.postCredentialsAws = async body => {
 }
 
 api.imagepress.v0.postCredentialsGit = async body => {
-  const path = '/credentials/git'
+  const path = 'v0/credentials/git'
 
   // Request
   const params = {
@@ -826,7 +830,7 @@ api.imagepress.v0.postCredentialsGit = async body => {
 }
 
 api.imagepress.v0.postCredentialsVerify = async body => {
-  const path = '/credentials/verify'
+  const path = 'v0/credentials/verify'
 
   // Request
   const params = {
@@ -838,7 +842,7 @@ api.imagepress.v0.postCredentialsVerify = async body => {
 }
 
 api.imagepress.v0.postImageAttrs = async body => {
-  const path = '/image/attrs'
+  const path = 'v0/image/attrs'
 
   // Request
   const params = {
@@ -850,7 +854,7 @@ api.imagepress.v0.postImageAttrs = async body => {
 }
 
 api.imagepress.v0.postImageTagger = async body => {
-  const path = '/image/tagger'
+  const path = 'v0/image/tagger'
 
   // Request
   const params = {
@@ -862,7 +866,7 @@ api.imagepress.v0.postImageTagger = async body => {
 }
 
 api.imagepress.v0.getImageVerify = async body => {
-  const path = '/image/verify'
+  const path = 'v0/image/verify'
 
   // Request
   const params = {
@@ -874,7 +878,7 @@ api.imagepress.v0.getImageVerify = async body => {
 }
 
 api.imagepress.v0.getRepoDownload = async body => {
-  const path = '/repo/download'
+  const path = 'v0/repo/download'
 
   // Request
   const params = {
@@ -886,7 +890,7 @@ api.imagepress.v0.getRepoDownload = async body => {
 }
 
 api.imagepress.v0.postRepoUpload = async body => {
-  const path = '/repo/upload'
+  const path = 'v0/repo/upload'
 
   // Request
   const params = {
@@ -898,7 +902,7 @@ api.imagepress.v0.postRepoUpload = async body => {
 }
 
 api.imagepress.v0.postRepoWorker = async body => {
-  const path = '/repo/worker'
+  const path = 'v0/repo/worker'
 
   // Request
   const params = {
@@ -909,8 +913,20 @@ api.imagepress.v0.postRepoWorker = async body => {
   return fetch.request(path, params)
 }
 
+api.imagepress.v0.getRepoList = async body => {
+  const path = 'v0/repo/list'
+
+  // Request
+  const params = {
+    method: 'GET',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
 api.imagepress.v0.getRepo = async body => {
-  const path = '/repo'
+  const path = 'v0/repo'
 
   // Request
   const params = {
@@ -922,7 +938,7 @@ api.imagepress.v0.getRepo = async body => {
 }
 
 api.imagepress.v0.postRepo = async body => {
-  const path = '/repo'
+  const path = 'v0/repo'
 
   // Request
   const params = {
@@ -934,7 +950,7 @@ api.imagepress.v0.postRepo = async body => {
 }
 
 api.imagepress.v0.deleteRepo = async body => {
-  const path = '/repo'
+  const path = 'v0/repo'
 
   // Request
   const params = {
@@ -946,7 +962,7 @@ api.imagepress.v0.deleteRepo = async body => {
 }
 
 api.imagepress.v0.getSources = async body => {
-  const path = '/sources'
+  const path = 'v0/sources'
 
   // Request
   const params = {
@@ -958,7 +974,7 @@ api.imagepress.v0.getSources = async body => {
 }
 
 api.imagepress.v0.getSource = async body => {
-  const path = '/source'
+  const path = 'v0/source'
 
   // Request
   const params = {
@@ -970,7 +986,7 @@ api.imagepress.v0.getSource = async body => {
 }
 
 api.imagepress.v0.postSource = async body => {
-  const path = '/source'
+  const path = 'v0/source'
 
   // Request
   const params = {
@@ -982,7 +998,7 @@ api.imagepress.v0.postSource = async body => {
 }
 
 api.imagepress.v0.deleteSource = async body => {
-  const path = '/source'
+  const path = 'v0/source'
 
   // Request
   const params = {
@@ -994,7 +1010,7 @@ api.imagepress.v0.deleteSource = async body => {
 }
 
 api.imagepress.v0.putSource = async body => {
-  const path = '/source'
+  const path = 'v0/source'
 
   // Request
   const params = {
@@ -1006,7 +1022,7 @@ api.imagepress.v0.putSource = async body => {
 }
 
 api.imagepress.v0.postSourceStatus = async body => {
-  const path = '/source/status'
+  const path = 'v0/source/status'
 
   // Request
   const params = {
