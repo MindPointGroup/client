@@ -79,9 +79,8 @@ module.exports = async args => {
       if (lastSubsection !== subsection) {
         lastSubsection = subsection
         docstext.push(`${++index}. <a href="#${subsection}">${subsection}</a>`)
+        docstext.push('')
       }
-
-      docstext.push('')
 
       const version = getVersion(mapping.path, def.basePath)
       nsobj[version] = {}
