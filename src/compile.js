@@ -122,7 +122,16 @@ module.exports = async args => {
     //
     // Add each path under each namespace
     //
+    let lastSubsection = ''
+
     def.paths.forEach(mapping => {
+      const subsection = mapping.path.split('/')[1]
+
+      if (lastSubsection !== subsection) {
+        lastSubsection = subsection
+        docstext.push(`### ${subsection}`)
+      }
+
       mapping.path = mapping.path.replace(/\/$/, '')
 
       const version = getVersion(mapping.path, def.basePath)

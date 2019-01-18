@@ -1,5 +1,6 @@
 # imagepress
 
+### baseline
 ## POST /v0/baseline/complete
 
 ```js
@@ -253,6 +254,7 @@ const { res, err, data } = await api.imagepress.v0.deleteBaselineDelete({
 })
 ```
 
+### bucket
 ## GET /v0/bucket/list
 
 ```js
@@ -325,6 +327,7 @@ const { res, err, data } = await api.imagepress.v0.getBucketRegions({
 })
 ```
 
+### credentials
 ## DELETE /v0/credentials
 
 ```js
@@ -372,6 +375,7 @@ const { res, err, data } = await api.imagepress.v0.postCredentialsVerify({
 })
 ```
 
+### image
 ## POST /v0/image/attrs
 
 ```js
@@ -444,6 +448,7 @@ const { res, err, data } = await api.imagepress.v0.getImageVerify({
 })
 ```
 
+### repo
 ## GET /v0/repo/download
 
 ```js
@@ -629,6 +634,7 @@ const { res, err, data } = await api.imagepress.v0.deleteRepo({
 })
 ```
 
+### sources
 ## GET /v0/sources
 
 ```js
@@ -636,6 +642,7 @@ const { res, err, data } = await api.imagepress.v0.getSources({
 })
 ```
 
+### source
 ## GET /v0/source
 
 ```js
