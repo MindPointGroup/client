@@ -70,7 +70,19 @@ module.exports = async args => {
     // Ensure that if there are individual versions, we
     // include them in the namespace object.
     //
+    let index = 0
+    let lastSubsection = null
+
     for (const mapping of def.paths) {
+      const subsection = mapping.path.split('/')[1]
+
+      if (lastSubsection !== subsection) {
+        lastSubsection = subsection
+        docstext.push(`${++index}. <a href="#${subsection}">${subsection}</a>`)
+      }
+
+      docstext.push('')
+
       const version = getVersion(mapping.path, def.basePath)
       nsobj[version] = {}
 
@@ -122,8 +134,6 @@ module.exports = async args => {
     //
     // Add each path under each namespace
     //
-    let lastSubsection = ''
-
     def.paths.forEach(mapping => {
       const subsection = mapping.path.split('/')[1]
 
