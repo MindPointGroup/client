@@ -2,37 +2,22 @@
 // DO NOT EDIT! GENERATED FILE!
 //
 
-const Fetch = require('fetch')
 const validateProps = require('./validate-props')
-const { default: Amplify } = require('aws-amplify')
 
-const fetch = new Fetch({
-  root: 'https://api.dev.imgpress.io',
-  auth: Amplify.Auth
-})
+let fetch = null
+const api = {}
 
-const api = module.exports = {}
+module.exports = fn => {
+  fetch = fn
+  return api
+}
 
 const validators = {}
 
-validators['baseline_bake'] = async ({ path, method, body, mock }) => {
-  const props = {
-    instanceId: { type: 'String', required: true },
-    imageName: { type: 'String', required: true },
-    imageId: { type: 'String', required: true },
-    region: { type: 'String', required: true },
-    noop: {},
-    public: { type: 'String', required: true },
-    private: { type: 'String', required: true }
-  }
-
-  return validateProps(props, body, mock)
-}
-
 validators['baseline_complete'] = async ({ path, method, body, mock }) => {
   const props = {
-    noop: { type: 'Function' },
-    public: { type: 'Stirng', required: true },
+    noop: { type: 'Boolean', default: false },
+    public: { type: 'String', required: true },
     private: { type: 'String', required: true },
     status: { type: 'String', required: true },
     instanceId: { type: 'String', required: true },
@@ -80,8 +65,8 @@ validators['baseline_bake_status'] = async ({ path, method, body, mock }) => {
     public: { type: 'String', required: true },
     private: { type: 'String', required: true },
     id: { type: 'String', required: true },
-    userid: { type: 'String' },
-    noop: { type: 'Function' }
+    noop: { type: 'Boolean', required: false },
+    instanceId: { type: 'String', required: false }
   }
 
   return validateProps(props, body, mock)
@@ -91,7 +76,7 @@ validators['baseline_distribute'] = async ({ path, method, body, mock }) => {
   const props = {
     id: { type: 'String', required: true },
     sourceRegion: { type: 'String', required: true },
-    regions: { type: 'Array' },
+    regions: { type: 'Array', default: [] },
     sourceImage: { type: 'String', required: true },
     public: { type: 'String', required: true },
     private: { type: 'String', required: true }
@@ -106,6 +91,75 @@ validators['baseline_distro_status'] = async ({ path, method, body, mock }) => {
     region: { type: 'String', required: true },
     public: { type: 'String', required: true },
     private: { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['baseline_delete'] = async ({ path, method, body, mock }) => {
+  if (!method === 'DELETE') {
+    return { err: { method: 'Must be DELETE' } }
+  }
+
+  const props = {
+    public: { type: 'String', required: true },
+    private: { type: 'String', required: true }
+  }
+
+  if (path.includes('copy')) {
+    props.region = { type: 'String', required: true }
+    props.imageId = { type: 'String', required: true }
+  } else if (path.includes('copies')) {
+    // expects [{ region, imageId }, ...]
+    props.copies = { type: 'Array', required: true }
+  } else {
+    props.id = { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['baseline_delete'] = async ({ path, method, body, mock }) => {
+  if (!method === 'DELETE') {
+    return { err: { method: 'Must be DELETE' } }
+  }
+
+  const props = {
+    public: { type: 'String', required: true },
+    private: { type: 'String', required: true }
+  }
+
+  if (path.includes('copy')) {
+    props.region = { type: 'String', required: true }
+    props.imageId = { type: 'String', required: true }
+  } else if (path.includes('copies')) {
+    // expects [{ region, imageId }, ...]
+    props.copies = { type: 'Array', required: true }
+  } else {
+    props.id = { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['baseline_delete'] = async ({ path, method, body, mock }) => {
+  if (!method === 'DELETE') {
+    return { err: { method: 'Must be DELETE' } }
+  }
+
+  const props = {
+    public: { type: 'String', required: true },
+    private: { type: 'String', required: true }
+  }
+
+  if (path.includes('copy')) {
+    props.region = { type: 'String', required: true }
+    props.imageId = { type: 'String', required: true }
+  } else if (path.includes('copies')) {
+    // expects [{ region, imageId }, ...]
+    props.copies = { type: 'Array', required: true }
+  } else {
+    props.id = { type: 'String', required: true }
   }
 
   return validateProps(props, body, mock)
@@ -243,40 +297,6 @@ validators['credentials_verify'] = async ({ path, method, body, mock }) => {
   return validateProps(props, body, mock)
 }
 
-validators['image'] = async ({ path, method, body, mock }) => {
-  const props = {
-    id: { type: 'String', required: true },
-    public: { type: 'String', required: true },
-    private: { type: 'String', required: true },
-    name: { type: 'String', required: true },
-    description: { type: 'String', required: true },
-
-    //
-    // Shouldn't this be an array?
-    //
-    tags: { type: 'String', required: true }
-  }
-
-  return validateProps(props, body, mock)
-}
-
-validators['image'] = async ({ path, method, body, mock }) => {
-  const props = {
-    id: { type: 'String', required: true },
-    public: { type: 'String', required: true },
-    private: { type: 'String', required: true },
-    name: { type: 'String', required: true },
-    description: { type: 'String', required: true },
-
-    //
-    // Shouldn't this be an array?
-    //
-    tags: { type: 'String', required: true }
-  }
-
-  return validateProps(props, body, mock)
-}
-
 validators['image_attrs'] = async ({ path, method, body, mock }) => {
   const props = {
     imageId: { type: 'String', required: true },
@@ -323,10 +343,35 @@ validators['image_tagger'] = async ({ path, method, body, mock }) => {
 
 validators['image_verify'] = async ({ path, method, body, mock }) => {
   const props = {
-    id: { type: 'String', required: true },
+    imageId: { type: 'String', required: true },
     region: { type: 'String', required: true },
     public: { type: 'String', required: true },
     private: { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['repo_download'] = async ({ path, method, body, mock }) => {
+  if (!method === 'GET') {
+    return { err: { method: 'Must be GET' } }
+  }
+
+  const match = new RegExp([
+    'ap-south-1', 'eu-west-3', 'eu-west-2',
+    'eu-west-1', 'ap-northeast-2', 'ap-northeast-1',
+    'sa-east-1', 'ca-central-1', 'ap-southeast-1',
+    'ap-southeast-2', 'eu-central-1', 'us-east-1',
+    'us-east-2', 'us-west-1', 'us-west-2'
+  ].join('|'))
+
+  const props = {
+    repoUrl: { type: 'String', required: true },
+    isTarball: { type: 'Boolean', default: false },
+    public: { type: 'String', required: true },
+    private: { type: 'String', required: true },
+    region: { type: 'String', required: true, match },
+    repoBranch: { type: 'String', default: 'HEAD' }
   }
 
   return validateProps(props, body, mock)
@@ -352,7 +397,7 @@ validators['repo_upload'] = async ({ path, method, body, mock }) => {
     region: { type: 'String', required: true, match },
     tarArchive: { type: 'String', required: true },
     zipArchive: { type: 'String', required: true },
-    repoBranch: { type: 'String', required: true }
+    repoBranch: { type: 'String', default: 'HEAD' }
   }
 
   return validateProps(props, body, mock)
@@ -365,12 +410,12 @@ validators['repo'] = async ({ path, method, body, mock }) => {
     url: { type: 'String' },
     name: { type: 'String' },
     fileList: { type: 'Array' },
-    assignIp: body.assignIp,
-    subnetId: body.subnetId,
-    branch: body.branch,
+    assignIp: { type: 'Boolean' },
+    subnetId: { type: 'String', required: true },
+    branch: { type: 'String' },
     status: { type: 'String' },
-    credentialid: body.credentialid,
-    noWorker: body.noWorker || false
+    credentialid: { type: 'String', required: true },
+    noWorker: { type: 'Boolean', default: false }
   }
 
   if (method === 'POST') {
@@ -391,12 +436,12 @@ validators['repo'] = async ({ path, method, body, mock }) => {
     url: { type: 'String' },
     name: { type: 'String' },
     fileList: { type: 'Array' },
-    assignIp: body.assignIp,
-    subnetId: body.subnetId,
-    branch: body.branch,
+    assignIp: { type: 'Boolean' },
+    subnetId: { type: 'String', required: true },
+    branch: { type: 'String' },
     status: { type: 'String' },
-    credentialid: body.credentialid,
-    noWorker: body.noWorker || false
+    credentialid: { type: 'String', required: true },
+    noWorker: { type: 'Boolean', default: false }
   }
 
   if (method === 'POST') {
@@ -405,6 +450,18 @@ validators['repo'] = async ({ path, method, body, mock }) => {
     props.status = { ...props.status, required: true }
     props.url = { ...props.url, required: true }
     props.noWorker = { type: 'Boolean' }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['repo_delete'] = async ({ path, method, body, mock }) => {
+  if (!method === 'DELETE') {
+    return { err: { method: 'Must be DELETE' } }
+  }
+
+  const props = {
+    id: { type: 'String', required: true }
   }
 
   return validateProps(props, body, mock)
@@ -564,18 +621,6 @@ api.imagepress = {
   'v0': {}
 }
 
-api.imagepress.v0.postBaselineBake = async body => {
-  const path = '/baseline/bake'
-
-  // Request
-  const params = {
-    method: 'POST',
-    body
-  }
-
-  return fetch.request(path, params)
-}
-
 api.imagepress.v0.postBaselineComplete = async body => {
   const path = '/baseline/complete'
 
@@ -642,6 +687,42 @@ api.imagepress.v0.getBaselineDistributeStatus = async body => {
   // Request
   const params = {
     method: 'GET',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.deleteBaselineDeleteCopy = async body => {
+  const path = '/baseline/delete/copy'
+
+  // Request
+  const params = {
+    method: 'DELETE',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.deleteBaselineDeleteCopies = async body => {
+  const path = '/baseline/delete/copies'
+
+  // Request
+  const params = {
+    method: 'DELETE',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.deleteBaselineDelete = async body => {
+  const path = '/baseline/delete'
+
+  // Request
+  const params = {
+    method: 'DELETE',
     body
   }
 
@@ -756,30 +837,6 @@ api.imagepress.v0.postCredentialsVerify = async body => {
   return fetch.request(path, params)
 }
 
-api.imagepress.v0.getImage = async body => {
-  const path = '/image'
-
-  // Request
-  const params = {
-    method: 'GET',
-    body
-  }
-
-  return fetch.request(path, params)
-}
-
-api.imagepress.v0.postImage = async body => {
-  const path = '/image'
-
-  // Request
-  const params = {
-    method: 'POST',
-    body
-  }
-
-  return fetch.request(path, params)
-}
-
 api.imagepress.v0.postImageAttrs = async body => {
   const path = '/image/attrs'
 
@@ -870,6 +927,18 @@ api.imagepress.v0.postRepo = async body => {
   // Request
   const params = {
     method: 'POST',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.deleteRepo = async body => {
+  const path = '/repo'
+
+  // Request
+  const params = {
+    method: 'DELETE',
     body
   }
 

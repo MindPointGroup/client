@@ -1,47 +1,15 @@
 # imagepress
 
-## POST /v0/baseline/bake
-
-```js
-const { res, err, data } = await api.imagepress.v0.postBaselineBake({
-  instanceId: {
-    type: String
-    required: true
-  },
-  imageName: {
-    type: String
-    required: true
-  },
-  imageId: {
-    type: String
-    required: true
-  },
-  region: {
-    type: String
-    required: true
-  },
-  noop: {
-  },
-  public: {
-    type: String
-    required: true
-  },
-  private: {
-    type: String
-    required: true
-  },
-})
-```
-
 ## POST /v0/baseline/complete
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postBaselineComplete({
   noop: {
-    type: Function
+    type: Boolean
+    default: false
   },
   public: {
-    type: Stirng
+    type: String
     required: true
   },
   private: {
@@ -159,11 +127,13 @@ const { res, err, data } = await api.imagepress.v0.getBaselineBakeStatus({
     type: String
     required: true
   },
-  userid: {
-    type: String
-  },
   noop: {
-    type: Function
+    type: Boolean
+    required: false
+  },
+  instanceId: {
+    type: String
+    required: false
   },
 })
 ```
@@ -182,6 +152,7 @@ const { res, err, data } = await api.imagepress.v0.postBaselineDistribute({
   },
   regions: {
     type: Array
+    default: 
   },
   sourceImage: {
     type: String
@@ -215,6 +186,67 @@ const { res, err, data } = await api.imagepress.v0.getBaselineDistributeStatus({
     required: true
   },
   private: {
+    type: String
+    required: true
+  },
+})
+```
+
+## DELETE /v0/baseline/delete/copy
+
+```js
+const { res, err, data } = await api.imagepress.v0.deleteBaselineDeleteCopy({
+  public: {
+    type: String
+    required: true
+  },
+  private: {
+    type: String
+    required: true
+  },
+  region: {
+    type: String
+    required: true
+  },
+  imageId: {
+    type: String
+    required: true
+  },
+})
+```
+
+## DELETE /v0/baseline/delete/copies
+
+```js
+const { res, err, data } = await api.imagepress.v0.deleteBaselineDeleteCopies({
+  public: {
+    type: String
+    required: true
+  },
+  private: {
+    type: String
+    required: true
+  },
+  copies: {
+    type: Array
+    required: true
+  },
+})
+```
+
+## DELETE /v0/baseline/delete
+
+```js
+const { res, err, data } = await api.imagepress.v0.deleteBaselineDelete({
+  public: {
+    type: String
+    required: true
+  },
+  private: {
+    type: String
+    required: true
+  },
+  id: {
     type: String
     required: true
   },
@@ -340,68 +372,6 @@ const { res, err, data } = await api.imagepress.v0.postCredentialsVerify({
 })
 ```
 
-## GET /v0/image
-
-```js
-const { res, err, data } = await api.imagepress.v0.getImage({
-  id: {
-    type: String
-    required: true
-  },
-  public: {
-    type: String
-    required: true
-  },
-  private: {
-    type: String
-    required: true
-  },
-  name: {
-    type: String
-    required: true
-  },
-  description: {
-    type: String
-    required: true
-  },
-  tags: {
-    type: String
-    required: true
-  },
-})
-```
-
-## POST /v0/image
-
-```js
-const { res, err, data } = await api.imagepress.v0.postImage({
-  id: {
-    type: String
-    required: true
-  },
-  public: {
-    type: String
-    required: true
-  },
-  private: {
-    type: String
-    required: true
-  },
-  name: {
-    type: String
-    required: true
-  },
-  description: {
-    type: String
-    required: true
-  },
-  tags: {
-    type: String
-    required: true
-  },
-})
-```
-
 ## POST /v0/image/attrs
 
 ```js
@@ -455,7 +425,7 @@ const { res, err, data } = await api.imagepress.v0.postImageTagger({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getImageVerify({
-  id: {
+  imageId: {
     type: String
     required: true
   },
@@ -477,7 +447,33 @@ const { res, err, data } = await api.imagepress.v0.getImageVerify({
 ## GET /v0/repo/download
 
 ```js
-const { res, err, data } = await api.imagepress.v0.getRepoDownload()
+const { res, err, data } = await api.imagepress.v0.getRepoDownload({
+  repoUrl: {
+    type: String
+    required: true
+  },
+  isTarball: {
+    type: Boolean
+    default: false
+  },
+  public: {
+    type: String
+    required: true
+  },
+  private: {
+    type: String
+    required: true
+  },
+  region: {
+    type: String
+    required: true
+    match: /ap-south-1|eu-west-3|eu-west-2|eu-west-1|ap-northeast-2|ap-northeast-1|sa-east-1|ca-central-1|ap-southeast-1|ap-southeast-2|eu-central-1|us-east-1|us-east-2|us-west-1|us-west-2/
+  },
+  repoBranch: {
+    type: String
+    default: HEAD
+  },
+})
 ```
 
 ## POST /v0/repo/upload
@@ -511,7 +507,7 @@ const { res, err, data } = await api.imagepress.v0.postRepoUpload({
   },
   repoBranch: {
     type: String
-    required: true
+    default: HEAD
   },
 })
 ```
@@ -544,17 +540,25 @@ const { res, err, data } = await api.imagepress.v0.getRepo({
     type: Array
   },
   assignIp: {
+    type: Boolean
   },
   subnetId: {
+    type: String
+    required: true
   },
   branch: {
+    type: String
   },
   status: {
     type: String
   },
   credentialid: {
+    type: String
+    required: true
   },
   noWorker: {
+    type: Boolean
+    default: false
   },
 })
 ```
@@ -584,19 +588,36 @@ const { res, err, data } = await api.imagepress.v0.postRepo({
     required: true
   },
   assignIp: {
+    type: Boolean
   },
   subnetId: {
+    type: String
+    required: true
   },
   branch: {
+    type: String
   },
   status: {
     type: String
     required: true
   },
   credentialid: {
+    type: String
+    required: true
   },
   noWorker: {
     type: Boolean
+  },
+})
+```
+
+## DELETE /v0/repo
+
+```js
+const { res, err, data } = await api.imagepress.v0.deleteRepo({
+  id: {
+    type: String
+    required: true
   },
 })
 ```

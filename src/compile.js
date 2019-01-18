@@ -1,4 +1,3 @@
-const pkg = require('../package.json')
 const path = require('path')
 
 function toCamel (s) {
@@ -19,15 +18,15 @@ function stripVersion (s) {
 }
 
 const header = `
-const Fetch = require('fetch')
 const validateProps = require('./validate-props')
-const { default: Amplify } = require('aws-amplify')
 
-const fetch = new Fetch({
-  root: '${pkg.config.url}',
-  auth: Amplify.Auth
-})
-`
+let fetch = null
+const api = {}
+
+module.exports = fn => {
+  fetch = fn
+  return api
+}`
 
 module.exports = async args => {
   const {
@@ -43,7 +42,6 @@ module.exports = async args => {
     `// DO NOT EDIT! GENERATED FILE!`,
     `//`,
     header,
-    `const api = module.exports = {}`,
     ``,
     `const validators = {}`,
     ``

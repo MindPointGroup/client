@@ -23,11 +23,12 @@ test('fail to connect to github (no token)', async t => {
 
 test('successfully create api', async t => {
   const { err, data } = await get(pkg.config)
+  const MOCK_FETCH_API = () => {}
 
   t.ok(!err)
 
   try {
-    const api = await require('.')
+    const api = await require('.')(MOCK_FETCH_API)
 
     //
     // There should be as many endpoints properly collected
