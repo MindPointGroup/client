@@ -2,44 +2,17 @@
 
 1. <a href="#baseline">baseline</a>
 
-
-
-
-
-
-
-
-
 2. <a href="#bucket">bucket</a>
-
-
-
 
 3. <a href="#credentials">credentials</a>
 
-
-
-
-
 4. <a href="#image">image</a>
 
-
-
 5. <a href="#repo">repo</a>
-
-
-
-
-
-
 
 6. <a href="#sources">sources</a>
 
 7. <a href="#source">source</a>
-
-
-
-
 
 ## baseline
 ### POST /v0/baseline/complete
@@ -49,14 +22,6 @@ const { res, err, data } = await api.imagepress.v0.postBaselineComplete({
   noop: {
     type: Boolean
     default: false
-  },
-  public: {
-    type: String
-    required: true
-  },
-  private: {
-    type: String
-    required: true
   },
   status: {
     type: String
@@ -84,58 +49,7 @@ const { res, err, data } = await api.imagepress.v0.postBaselineComplete({
 ### POST /v0/baseline/launch
 
 ```js
-const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({
-  name: {
-    type: String
-    required: true
-  },
-  cloudcredentialid: {
-    type: String
-    required: true
-  },
-  reposList: {
-    type: String
-    required: true
-  },
-  subnetId: {
-    type: String
-    required: true
-  },
-  imageId: {
-    type: String
-    required: true
-  },
-  region: {
-    type: String
-    required: true
-  },
-  assignIp: {
-    type: Boolean
-    default: true
-  },
-  platform: {
-    type: String
-  },
-  deviceName: {
-    type: String
-    default: /dev/xvda
-  },
-  instanceType: {
-    type: String
-    default: t2.medium
-  },
-  volumeSize: {
-    type: Number
-    default: 50
-  },
-  volumeType: {
-    type: String
-    default: gp2
-  },
-  tags: {
-    type: Array
-  },
-})
+const { res, err, data } = await api.imagepress.v0.postBaselineLaunch()
 ```
 
 ### GET /v0/baseline/list
@@ -154,14 +68,6 @@ const { res, err, data } = await api.imagepress.v0.getBaselineBakeStatus({
     required: true
   },
   region: {
-    type: String
-    required: true
-  },
-  public: {
-    type: String
-    required: true
-  },
-  private: {
     type: String
     required: true
   },
@@ -200,14 +106,6 @@ const { res, err, data } = await api.imagepress.v0.postBaselineDistribute({
     type: String
     required: true
   },
-  public: {
-    type: String
-    required: true
-  },
-  private: {
-    type: String
-    required: true
-  },
 })
 ```
 
@@ -223,11 +121,7 @@ const { res, err, data } = await api.imagepress.v0.getBaselineDistributeStatus({
     type: String
     required: true
   },
-  public: {
-    type: String
-    required: true
-  },
-  private: {
+  id: {
     type: String
     required: true
   },
@@ -238,14 +132,6 @@ const { res, err, data } = await api.imagepress.v0.getBaselineDistributeStatus({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.deleteBaselineDeleteCopy({
-  public: {
-    type: String
-    required: true
-  },
-  private: {
-    type: String
-    required: true
-  },
   region: {
     type: String
     required: true
@@ -261,14 +147,6 @@ const { res, err, data } = await api.imagepress.v0.deleteBaselineDeleteCopy({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.deleteBaselineDeleteCopies({
-  public: {
-    type: String
-    required: true
-  },
-  private: {
-    type: String
-    required: true
-  },
   copies: {
     type: Array
     required: true
@@ -280,14 +158,6 @@ const { res, err, data } = await api.imagepress.v0.deleteBaselineDeleteCopies({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.deleteBaselineDelete({
-  public: {
-    type: String
-    required: true
-  },
-  private: {
-    type: String
-    required: true
-  },
   id: {
     type: String
     required: true
@@ -300,11 +170,7 @@ const { res, err, data } = await api.imagepress.v0.deleteBaselineDelete({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBucketList({
-  public: {
-    type: String
-    required: true
-  },
-  private: {
+  id: {
     type: String
     required: true
   },
@@ -323,11 +189,7 @@ const { res, err, data } = await api.imagepress.v0.getBucketObjects({
     type: String
     required: true
   },
-  public: {
-    type: String
-    required: true
-  },
-  private: {
+  id: {
     type: String
     required: true
   },
@@ -342,11 +204,7 @@ const { res, err, data } = await api.imagepress.v0.getBucketRegion({
     type: String
     required: true
   },
-  public: {
-    type: String
-    required: true
-  },
-  private: {
+  id: {
     type: String
     required: true
   },
@@ -357,11 +215,7 @@ const { res, err, data } = await api.imagepress.v0.getBucketRegion({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBucketRegions({
-  public: {
-    type: String
-    required: true
-  },
-  private: {
+  id: {
     type: String
     required: true
   },
@@ -417,55 +271,6 @@ const { res, err, data } = await api.imagepress.v0.postCredentialsVerify({
 ```
 
 ## image
-### POST /v0/image/attrs
-
-```js
-const { res, err, data } = await api.imagepress.v0.postImageAttrs({
-  imageId: {
-    type: String
-    required: true
-  },
-  makePublic: {
-    type: Boolean
-  },
-  public: {
-    type: String
-    required: true
-  },
-  private: {
-    type: String
-    required: true
-  },
-})
-```
-
-### POST /v0/image/tagger
-
-```js
-const { res, err, data } = await api.imagepress.v0.postImageTagger({
-  imageId: {
-    type: String
-    required: true
-  },
-  tags: {
-    type: Array
-    required: true
-  },
-  region: {
-    type: String
-    required: true
-  },
-  public: {
-    type: String
-    required: true
-  },
-  private: {
-    type: String
-    required: true
-  },
-})
-```
-
 ### GET /v0/image/verify
 
 ```js
@@ -502,11 +307,7 @@ const { res, err, data } = await api.imagepress.v0.getRepoDownload({
     type: Boolean
     default: false
   },
-  public: {
-    type: String
-    required: true
-  },
-  private: {
+  cloudcredentialid: {
     type: String
     required: true
   },
@@ -530,11 +331,7 @@ const { res, err, data } = await api.imagepress.v0.postRepoUpload({
     type: String
     required: true
   },
-  public: {
-    type: String
-    required: true
-  },
-  private: {
+  id: {
     type: String
     required: true
   },
@@ -558,12 +355,6 @@ const { res, err, data } = await api.imagepress.v0.postRepoUpload({
 })
 ```
 
-### POST /v0/repo/worker
-
-```js
-const { res, err, data } = await api.imagepress.v0.postRepoWorker()
-```
-
 ### GET /v0/repo/list
 
 ```js
@@ -575,43 +366,9 @@ const { res, err, data } = await api.imagepress.v0.getRepoList({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getRepo({
-  public: {
+  id: {
     type: String
     required: true
-  },
-  private: {
-    type: String
-    required: true
-  },
-  url: {
-    type: String
-  },
-  name: {
-    type: String
-  },
-  fileList: {
-    type: Array
-  },
-  assignIp: {
-    type: Boolean
-  },
-  subnetId: {
-    type: String
-    required: true
-  },
-  branch: {
-    type: String
-  },
-  status: {
-    type: String
-  },
-  credentialid: {
-    type: String
-    required: true
-  },
-  noWorker: {
-    type: Boolean
-    default: false
   },
 })
 ```
@@ -620,11 +377,19 @@ const { res, err, data } = await api.imagepress.v0.getRepo({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postRepo({
-  public: {
+  id: {
     type: String
     required: true
   },
-  private: {
+  status: {
+    type: String
+    required: true
+  },
+  noWorker: {
+    type: Boolean
+    default: false
+  },
+  name: {
     type: String
     required: true
   },
@@ -632,7 +397,7 @@ const { res, err, data } = await api.imagepress.v0.postRepo({
     type: String
     required: true
   },
-  name: {
+  branch: {
     type: String
     required: true
   },
@@ -640,26 +405,17 @@ const { res, err, data } = await api.imagepress.v0.postRepo({
     type: Array
     required: true
   },
+  cloudcredentialid: {
+    type: String
+    required: true
+  },
   assignIp: {
     type: Boolean
+    default: false
   },
   subnetId: {
     type: String
     required: true
-  },
-  branch: {
-    type: String
-  },
-  status: {
-    type: String
-    required: true
-  },
-  credentialid: {
-    type: String
-    required: true
-  },
-  noWorker: {
-    type: Boolean
   },
 })
 ```
@@ -703,11 +459,7 @@ const { res, err, data } = await api.imagepress.v0.postSource({
     type: String
     required: true
   },
-  public: {
-    type: String
-    required: true
-  },
-  private: {
+  cloudcredentialid: {
     type: String
     required: true
   },
@@ -720,9 +472,11 @@ const { res, err, data } = await api.imagepress.v0.postSource({
   },
   tags: {
     type: Array
+    default: 
   },
   accounts: {
     type: Array
+    default: 
   },
   type: {
     type: String
@@ -737,6 +491,7 @@ const { res, err, data } = await api.imagepress.v0.postSource({
   },
   makePublic: {
     type: Boolean
+    default: false
   },
 })
 ```
