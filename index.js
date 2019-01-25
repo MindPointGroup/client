@@ -541,35 +541,13 @@ validators['source_delete'] = async ({ path, method, body, mock }) => {
 
 validators['source_update'] = async ({ path, method, body, mock }) => {
   const props = {
-    imageTaskId: { type: 'String' },
-    imageId: { type: 'String' },
     id: { type: 'String', required: true },
     accounts: { type: 'Array', default: [] },
     makePublic: { type: 'Boolean', default: false },
     tags: { type: 'Array', default: [] }
   }
 
-  const r = validateProps(props, body, mock)
-
-  if (mock) return r
-
-  if (!r.imageTaskId && !r.imageId) {
-    return {
-      err: {
-        '[imageTaskId, imageId]': 'One is required'
-      }
-    }
-  }
-
-  if (r.imageTaskId && r.imageId) {
-    return {
-      err: {
-        '[imageTaskId, imageId]': 'One is required, both were supplied'
-      }
-    }
-  }
-
-  return r
+  return validateProps(props, body, mock)
 }
 
 validators['source_import_status'] = async ({ path, method, body, mock }) => {

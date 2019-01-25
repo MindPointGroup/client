@@ -572,12 +572,6 @@ const { res, err, data } = await api.imagepress.v0.deleteSource({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.putSource({
-  imageTaskId: {
-    type: String
-  },
-  imageId: {
-    type: String
-  },
   id: {
     type: String
     required: true
