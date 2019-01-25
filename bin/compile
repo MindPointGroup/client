@@ -1,4 +1,13 @@
-const debug = require('debug')
-const get = require('../src/get')
+#!/usr/bin/env node
+// vim: set syntax=javascript:
 
-module.exports = async args => get()
+const debug = require('debug')
+const { config } = require('../package.json')
+const get = require('../src/get');
+
+
+(async () => {
+   console.log('building client...')
+   await get(config) 
+   console.log('done')
+})()
