@@ -49,7 +49,63 @@ const { res, err, data } = await api.imagepress.v0.postBaselineComplete({
 ### POST /v0/baseline/launch
 
 ```js
-const { res, err, data } = await api.imagepress.v0.postBaselineLaunch()
+const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({
+  id: {
+    type: String
+    required: false
+  },
+  name: {
+    type: String
+    required: false
+  },
+  cloudcredentialid: {
+    type: String
+    required: true
+  },
+  reposList: {
+    type: Array
+    default: 
+  },
+  subnetId: {
+    type: String
+    required: true
+  },
+  imageId: {
+    type: String
+    required: true
+  },
+  region: {
+    type: String
+    required: true
+  },
+  assignIp: {
+    type: Boolean
+    default: true
+  },
+  platform: {
+    type: String
+  },
+  deviceName: {
+    type: String
+    default: /dev/xvda
+  },
+  tags: {
+    type: Array
+    default: 
+  },
+  instanceType: {
+    type: String
+    default: t2.medium
+  },
+  volumeSize: {
+    type: Number
+    default: 50
+  },
+  volumeType: {
+    type: String
+    default: gp2
+  },
+})
 ```
 
 ### GET /v0/baseline/list
@@ -383,7 +439,7 @@ const { res, err, data } = await api.imagepress.v0.postRepo({
   },
   status: {
     type: String
-    required: true
+    required: false
   },
   noWorker: {
     type: Boolean
@@ -408,6 +464,10 @@ const { res, err, data } = await api.imagepress.v0.postRepo({
   cloudcredentialid: {
     type: String
     required: true
+  },
+  gitcredentialid: {
+    type: String
+    required: false
   },
   assignIp: {
     type: Boolean

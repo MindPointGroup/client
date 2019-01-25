@@ -32,7 +32,7 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
     id: { type: 'String', required: false },
     name: { type: 'String', required: false },
     cloudcredentialid: { type: 'String', required: true },
-    reposList: { type: 'String', default: [] },
+    reposList: { type: 'Array', default: [] },
     subnetId: { type: 'String', required: true },
     imageId: { type: 'String', required: true },
     region: { type: 'String', required: true },
@@ -50,6 +50,8 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
   }
 
   const r = validateProps(props, body, mock)
+
+  if (mock) return r
 
   if (!r.name && !r.id) {
     return { err: { 'name, id': 'One is required' } }
@@ -384,7 +386,7 @@ validators['repo'] = async ({ path, method, body, mock }) => {
   }
 
   if (method === 'POST') {
-    props.status = { type: 'String', required: true }
+    props.status = { type: 'String', required: false }
   }
 
   if (method === 'POST' && body.status !== 'failed') {
@@ -396,6 +398,7 @@ validators['repo'] = async ({ path, method, body, mock }) => {
       props.fileList = { type: 'Array', required: true }
       props.url = { type: 'String', required: true }
       props.cloudcredentialid = { type: 'String', required: true }
+      props.gitcredentialid = { type: 'String', required: false }
       props.assignIp = { type: 'Boolean', default: false }
       props.subnetId = { type: 'String', required: true }
     }
@@ -410,7 +413,7 @@ validators['repo'] = async ({ path, method, body, mock }) => {
   }
 
   if (method === 'POST') {
-    props.status = { type: 'String', required: true }
+    props.status = { type: 'String', required: false }
   }
 
   if (method === 'POST' && body.status !== 'failed') {
@@ -422,6 +425,7 @@ validators['repo'] = async ({ path, method, body, mock }) => {
       props.fileList = { type: 'Array', required: true }
       props.url = { type: 'String', required: true }
       props.cloudcredentialid = { type: 'String', required: true }
+      props.gitcredentialid = { type: 'String', required: false }
       props.assignIp = { type: 'Boolean', default: false }
       props.subnetId = { type: 'String', required: true }
     }
