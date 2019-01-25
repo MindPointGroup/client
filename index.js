@@ -486,6 +486,8 @@ validators['source_import'] = async ({ path, method, body, mock }) => {
 
   const r = validateProps(props, body, mock)
 
+  if (mock) return r
+
   const tags = []
 
   if (r.tags) {
@@ -548,6 +550,8 @@ validators['source_update'] = async ({ path, method, body, mock }) => {
   }
 
   const r = validateProps(props, body, mock)
+
+  if (mock) return r
 
   if (!r.imageTaskId && !r.imageId) {
     return {

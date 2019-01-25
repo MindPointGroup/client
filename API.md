@@ -571,7 +571,30 @@ const { res, err, data } = await api.imagepress.v0.deleteSource({
 ### PUT /v0/source
 
 ```js
-const { res, err, data } = await api.imagepress.v0.putSource()
+const { res, err, data } = await api.imagepress.v0.putSource({
+  imageTaskId: {
+    type: String
+  },
+  imageId: {
+    type: String
+  },
+  id: {
+    type: String
+    required: true
+  },
+  accounts: {
+    type: Array
+    default: 
+  },
+  makePublic: {
+    type: Boolean
+    default: false
+  },
+  tags: {
+    type: Array
+    default: 
+  },
+})
 ```
 
 ### POST /v0/source/status
