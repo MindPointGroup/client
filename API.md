@@ -74,8 +74,8 @@ const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({
     type: String
     required: true
   },
-  region: {
-    type: String
+  regions: {
+    type: Array
     required: true
   },
   assignIp: {
@@ -84,6 +84,10 @@ const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({
   },
   platform: {
     type: String
+  },
+  permissions: {
+    type: Object
+    required: true
   },
   deviceName: {
     type: String

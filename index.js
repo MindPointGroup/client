@@ -35,9 +35,10 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
     reposList: { type: 'Array', default: [] },
     subnetId: { type: 'String', required: true },
     imageId: { type: 'String', required: true },
-    region: { type: 'String', required: true },
+    regions: { type: 'Array', required: true },
     assignIp: { type: 'Boolean', default: true },
     platform: { type: 'String' },
+    permissions: { type: 'Object', required: true },
     deviceName: { type: 'String', default: '/dev/xvda' },
     tags: { type: 'Array', default: [] },
     //
@@ -52,6 +53,22 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
   const r = validateProps(props, body, mock)
 
   if (mock) return r
+
+  if (typeof r.permissions.private !== 'boolean') {
+    return { err: { 'permissions.private': 'Boolean required' } }
+  }
+
+  if (!Array.isArray(r.permissions.accounts)) {
+    return { err: { 'permissions.accounts': 'Array required' } }
+  }
+
+  if (r.permissions.accounts.length > 0) {
+    r.permissions.accounts.map((account, i) => {
+      if (typeof accounts !== 'string') {
+        return { err: { [`permissions.accounts[${i}]`]: 'String required' } }
+      }
+    })
+  }
 
   if (!r.name && !r.id) {
     return { err: { 'name, id': 'One is required' } }
