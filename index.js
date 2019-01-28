@@ -316,17 +316,6 @@ validators['credentials_verify'] = async ({ path, method, body, mock }) => {
   return validateProps(props, body, mock)
 }
 
-validators['image_verify'] = async ({ path, method, body, mock }) => {
-  const props = {
-    imageId: { type: 'String', required: true },
-    region: { type: 'String', required: true },
-    public: { type: 'String', required: true },
-    private: { type: 'String', required: true }
-  }
-
-  return validateProps(props, body, mock)
-}
-
 validators['repo_download'] = async ({ path, method, body, mock }) => {
   if (!method === 'GET') {
     return { err: { method: 'Must be GET' } }
@@ -578,6 +567,16 @@ validators['source_import_status'] = async ({ path, method, body, mock }) => {
   return r
 }
 
+validators['image_verify'] = async ({ path, method, body, mock }) => {
+  const props = {
+    imageId: { type: 'String', required: true },
+    region: { type: 'String', required: true },
+    id: { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
 api.imagepress = {
   'v0': {}
 }
@@ -798,18 +797,6 @@ api.imagepress.v0.postCredentialsVerify = async body => {
   return fetch.request(path, params)
 }
 
-api.imagepress.v0.getImageVerify = async body => {
-  const path = 'v0/image/verify'
-
-  // Request
-  const params = {
-    method: 'GET',
-    body
-  }
-
-  return fetch.request(path, params)
-}
-
 api.imagepress.v0.getRepoDownload = async body => {
   const path = 'v0/repo/download'
 
@@ -948,6 +935,18 @@ api.imagepress.v0.postSourceStatus = async body => {
   // Request
   const params = {
     method: 'POST',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.getImageVerify = async body => {
+  const path = 'v0/image/verify'
+
+  // Request
+  const params = {
+    method: 'GET',
     body
   }
 

@@ -6,13 +6,13 @@
 
 3. <a href="#credentials">credentials</a>
 
-4. <a href="#image">image</a>
+4. <a href="#repo">repo</a>
 
-5. <a href="#repo">repo</a>
+5. <a href="#sources">sources</a>
 
-6. <a href="#sources">sources</a>
+6. <a href="#source">source</a>
 
-7. <a href="#source">source</a>
+7. <a href="#image">image</a>
 
 ## baseline
 ### POST /v0/baseline/complete
@@ -326,30 +326,6 @@ const { res, err, data } = await api.imagepress.v0.postCredentialsVerify({
 })
 ```
 
-## image
-### GET /v0/image/verify
-
-```js
-const { res, err, data } = await api.imagepress.v0.getImageVerify({
-  imageId: {
-    type: String
-    required: true
-  },
-  region: {
-    type: String
-    required: true
-  },
-  public: {
-    type: String
-    required: true
-  },
-  private: {
-    type: String
-    required: true
-  },
-})
-```
-
 ## repo
 ### GET /v0/repo/download
 
@@ -595,4 +571,24 @@ const { res, err, data } = await api.imagepress.v0.putSource({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postSourceStatus()
+```
+
+## image
+### GET /v0/image/verify
+
+```js
+const { res, err, data } = await api.imagepress.v0.getImageVerify({
+  imageId: {
+    type: String
+    required: true
+  },
+  region: {
+    type: String
+    required: true
+  },
+  id: {
+    type: String
+    required: true
+  },
+})
 ```
