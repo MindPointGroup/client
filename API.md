@@ -505,6 +505,7 @@ const { res, err, data } = await api.imagepress.v0.postSource({
   },
   region: {
     type: String
+    required: true
   },
   imageId: {
     type: String
@@ -528,6 +529,7 @@ const { res, err, data } = await api.imagepress.v0.postSource({
   },
   provider: {
     type: String
+    default: aws
   },
   makePublic: {
     type: Boolean
