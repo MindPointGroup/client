@@ -407,6 +407,7 @@ validators['repo'] = async ({ path, method, body, mock }) => {
       props.gitcredentialid = { type: 'String', required: false }
       props.assignIp = { type: 'Boolean', default: false }
       props.subnetId = { type: 'String', required: true }
+      props.region = { type: 'String', required: true }
     }
   }
 
@@ -434,6 +435,7 @@ validators['repo'] = async ({ path, method, body, mock }) => {
       props.gitcredentialid = { type: 'String', required: false }
       props.assignIp = { type: 'Boolean', default: false }
       props.subnetId = { type: 'String', required: true }
+      props.region = { type: 'String', required: true }
     }
   }
 

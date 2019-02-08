@@ -455,6 +455,10 @@ const { res, err, data } = await api.imagepress.v0.postRepo({
     type: String
     required: true
   },
+  region: {
+    type: String
+    required: true
+  },
 })
 ```
 
