@@ -433,7 +433,7 @@ const { res, err, data } = await api.imagepress.v0.postRepo({
   },
   branch: {
     type: String
-    required: true
+    required: false
   },
   fileList: {
     type: Array
