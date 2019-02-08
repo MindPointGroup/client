@@ -396,6 +396,9 @@ validators['repo'] = async ({ path, method, body, mock }) => {
   }
 
   if (method === 'POST' && body.status !== 'failed') {
+    if (body.noWorker !== true) {
+      props.token = { type: 'String', required: true }
+    }
     props.noWorker = { type: 'Boolean', default: false }
     if (!body.id) {
       props.name = { type: 'String', required: true }
@@ -424,6 +427,9 @@ validators['repo'] = async ({ path, method, body, mock }) => {
   }
 
   if (method === 'POST' && body.status !== 'failed') {
+    if (body.noWorker !== true) {
+      props.token = { type: 'String', required: true }
+    }
     props.noWorker = { type: 'Boolean', default: false }
     if (!body.id) {
       props.name = { type: 'String', required: true }

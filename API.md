@@ -419,6 +419,10 @@ const { res, err, data } = await api.imagepress.v0.postRepo({
     type: String
     required: false
   },
+  token: {
+    type: String
+    required: true
+  },
   noWorker: {
     type: Boolean
     default: false
