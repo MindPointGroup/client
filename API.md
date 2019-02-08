@@ -404,7 +404,6 @@ const { res, err, data } = await api.imagepress.v0.getRepoList({
 const { res, err, data } = await api.imagepress.v0.getRepo({
   id: {
     type: String
-    required: true
   },
 })
 ```
@@ -415,7 +414,6 @@ const { res, err, data } = await api.imagepress.v0.getRepo({
 const { res, err, data } = await api.imagepress.v0.postRepo({
   id: {
     type: String
-    required: true
   },
   status: {
     type: String

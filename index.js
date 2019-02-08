@@ -388,7 +388,7 @@ validators['repo_list'] = async ({ path, method, body, mock }) => {
 
 validators['repo'] = async ({ path, method, body, mock }) => {
   const props = {
-    id: { type: 'String', required: true }
+    id: { type: 'String' }
   }
 
   if (method === 'POST') {
@@ -415,7 +415,7 @@ validators['repo'] = async ({ path, method, body, mock }) => {
 
 validators['repo'] = async ({ path, method, body, mock }) => {
   const props = {
-    id: { type: 'String', required: true }
+    id: { type: 'String' }
   }
 
   if (method === 'POST') {
