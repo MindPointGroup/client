@@ -400,11 +400,10 @@ validators['repo'] = async ({ path, method, body, mock }) => {
       props.token = { type: 'String', required: true }
     }
     props.noWorker = { type: 'Boolean', default: false }
+    props.fileList = { type: 'Array', default: [] }
+    props.branch = { type: 'String', required: false }
     if (!body.id) {
       props.name = { type: 'String', required: true }
-      props.url = { type: 'String', required: true }
-      props.branch = { type: 'String', required: false }
-      props.fileList = { type: 'Array', required: true }
       props.url = { type: 'String', required: true }
       props.cloudcredentialid = { type: 'String', required: true }
       props.gitcredentialid = { type: 'String', required: false }
@@ -431,11 +430,10 @@ validators['repo'] = async ({ path, method, body, mock }) => {
       props.token = { type: 'String', required: true }
     }
     props.noWorker = { type: 'Boolean', default: false }
+    props.fileList = { type: 'Array', default: [] }
+    props.branch = { type: 'String', required: false }
     if (!body.id) {
       props.name = { type: 'String', required: true }
-      props.url = { type: 'String', required: true }
-      props.branch = { type: 'String', required: false }
-      props.fileList = { type: 'Array', required: true }
       props.url = { type: 'String', required: true }
       props.cloudcredentialid = { type: 'String', required: true }
       props.gitcredentialid = { type: 'String', required: false }

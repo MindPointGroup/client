@@ -427,20 +427,20 @@ const { res, err, data } = await api.imagepress.v0.postRepo({
     type: Boolean
     default: false
   },
+  fileList: {
+    type: Array
+    default: 
+  },
+  branch: {
+    type: String
+    required: false
+  },
   name: {
     type: String
     required: true
   },
   url: {
     type: String
-    required: true
-  },
-  branch: {
-    type: String
-    required: false
-  },
-  fileList: {
-    type: Array
     required: true
   },
   cloudcredentialid: {
