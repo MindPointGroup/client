@@ -70,7 +70,7 @@ const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({
     type: String
     required: true
   },
-  imageId: {
+  sourceid: {
     type: String
     required: true
   },
@@ -87,7 +87,8 @@ const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({
   },
   permissions: {
     type: Object
-    required: true
+    required: false
+    default: [object Object]
   },
   deviceName: {
     type: String
@@ -305,6 +306,30 @@ const { res, err, data } = await api.imagepress.v0.getCredentials({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postCredentialsAws({
+  type: {
+    type: String
+    match: /aws|git/
+  },
+  eid: {
+    type: String
+    required: true
+  },
+  arn: {
+    type: String
+    required: true
+  },
+  trust-policy: {
+    type: String
+    required: true
+  },
+  access-policy: {
+    type: String
+    required: true
+  },
+  name: {
+    type: String
+    required: true
+  },
 })
 ```
 
@@ -312,6 +337,22 @@ const { res, err, data } = await api.imagepress.v0.postCredentialsAws({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postCredentialsGit({
+  type: {
+    type: String
+    match: /aws|git/
+  },
+  username: {
+    type: String
+    required: true
+  },
+  password: {
+    type: String
+    required: true
+  },
+  name: {
+    type: String
+    required: true
+  },
 })
 ```
 

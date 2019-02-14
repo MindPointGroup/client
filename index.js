@@ -34,11 +34,11 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
     cloudcredentialid: { type: 'String', required: true },
     reposList: { type: 'Array', default: [] },
     subnetId: { type: 'String', required: true },
-    imageId: { type: 'String', required: true },
+    sourceid: { type: 'String', required: true },
     regions: { type: 'Array', required: true },
     assignIp: { type: 'Boolean', default: true },
     platform: { type: 'String' },
-    permissions: { type: 'Object', required: true },
+    permissions: { type: 'Object', required: false, default: { private: true, accounts: [] } },
     deviceName: { type: 'String', default: '/dev/xvda' },
     tags: { type: 'Array', default: [] },
     //
@@ -51,6 +51,8 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
   }
 
   const r = validateProps(props, body, mock)
+  console.log('R')
+  console.dir(r, { depth: null })
 
   if (mock) return r
 
@@ -284,7 +286,7 @@ validators['credentials_save'] = async ({ path, method, body, mock }) => {
 
   props.name = { type: 'String', required: true }
 
-  return validateProps({}, body, mock)
+  return validateProps(props, body, mock)
 }
 
 validators['credentials_save'] = async ({ path, method, body, mock }) => {
@@ -321,7 +323,7 @@ validators['credentials_save'] = async ({ path, method, body, mock }) => {
 
   props.name = { type: 'String', required: true }
 
-  return validateProps({}, body, mock)
+  return validateProps(props, body, mock)
 }
 
 validators['credentials_verify'] = async ({ path, method, body, mock }) => {
