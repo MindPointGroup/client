@@ -37,7 +37,6 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
     sourceid: { type: 'String', required: true },
     regions: { type: 'Array', required: true },
     assignIp: { type: 'Boolean', default: true },
-    platform: { type: 'String' },
     permissions: { type: 'Object', required: false, default: { private: true, accounts: [] } },
     deviceName: { type: 'String', default: '/dev/xvda' },
     tags: { type: 'Array', default: [] },
@@ -51,8 +50,6 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
   }
 
   const r = validateProps(props, body, mock)
-  console.log('R')
-  console.dir(r, { depth: null })
 
   if (mock) return r
 
@@ -80,12 +77,6 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
   }
   if (r.reposList.length > 0) {
     r.reposList.map((repo, index) => {
-      if (!repo.branch) {
-        return { err: { [`reposList[${index}].branch`]: 'Property required' } }
-      }
-      if (!repo.endpoint) {
-        return { err: { [`reposList[${index}].endpoint`]: 'Property required' } }
-      }
       if (!repo.scripts) {
         return { err: { [`reposList[${index}].scripts`]: 'Property required' } }
       }

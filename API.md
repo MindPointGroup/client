@@ -82,9 +82,6 @@ const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({
     type: Boolean
     default: true
   },
-  platform: {
-    type: String
-  },
   permissions: {
     type: Object
     required: false
