@@ -95,6 +95,10 @@ const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({
     type: Array
     default: 
   },
+  runWorker: {
+    type: Boolean
+    default: true
+  },
   instanceType: {
     type: String
     default: t2.medium

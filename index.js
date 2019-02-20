@@ -40,6 +40,7 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
     permissions: { type: 'Object', required: false, default: { private: true, accounts: [] } },
     deviceName: { type: 'String', default: '/dev/xvda' },
     tags: { type: 'Array', default: [] },
+    runWorker: { type: 'Boolean', default: true },
     //
     // these next ones we aren't exposing to users "yet" but we might
     // later so making it easier for later implementation on the UI.
@@ -53,30 +54,30 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
 
   if (mock) return r
 
-  if (typeof r.permissions.private !== 'boolean') {
+  if (typeof r.data.permissions.private !== 'boolean') {
     return { err: { 'permissions.private': 'Boolean required' } }
   }
 
-  if (!Array.isArray(r.permissions.accounts)) {
+  if (!Array.isArray(r.data.permissions.accounts)) {
     return { err: { 'permissions.accounts': 'Array required' } }
   }
 
-  if (r.permissions.accounts.length > 0) {
-    r.permissions.accounts.map((account, i) => {
+  if (r.data.permissions.accounts.length > 0) {
+    r.data.permissions.accounts.map((account, i) => {
       if (typeof accounts !== 'string') {
         return { err: { [`permissions.accounts[${i}]`]: 'String required' } }
       }
     })
   }
 
-  if (!r.name && !r.id) {
+  if (!r.data.name && !r.data.id) {
     return { err: { 'name, id': 'One is required' } }
   }
-  if (r.name && r.id) {
+  if (r.data.name && r.data.id) {
     return { err: { 'name, id': 'Both supplied. Only one is allowed.' } }
   }
-  if (r.reposList.length > 0) {
-    r.reposList.map((repo, index) => {
+  if (r.data.reposList.length > 0) {
+    r.data.reposList.map((repo, index) => {
       if (!repo.scripts) {
         return { err: { [`reposList[${index}].scripts`]: 'Property required' } }
       }
