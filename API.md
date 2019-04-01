@@ -555,10 +555,6 @@ const { res, err, data } = await api.imagepress.v0.postSource({
     type: String
     required: true
   },
-  region: {
-    type: String
-    required: true
-  },
   imageId: {
     type: String
     required: true

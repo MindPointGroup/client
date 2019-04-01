@@ -469,7 +469,6 @@ validators['source_import'] = async ({ path, method, body, mock }) => {
   const props = {
     name: { type: 'String', required: true },
     cloudcredentialid: { type: 'String', required: true },
-    region: { type: 'String', required: true },
     imageId: { type: 'String' },
     type: { type: 'String', required: true, match: /s3|ami/ },
     provider: { type: 'String', default: 'aws' }
