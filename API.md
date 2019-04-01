@@ -568,6 +568,10 @@ const { res, err, data } = await api.imagepress.v0.postSource({
     type: String
     default: aws
   },
+  region: {
+    type: String
+    default: us-east-1
+  },
 })
 ```
 

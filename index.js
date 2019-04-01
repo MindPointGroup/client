@@ -483,6 +483,7 @@ validators['source_import'] = async ({ path, method, body, mock }) => {
       resolve: value => value.length > 0
     }
   } else {
+    props.region = { type: 'String', default: 'us-east-1' }
     props.imageId = { ...props.imageId, required: true }
   }
 
