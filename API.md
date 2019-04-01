@@ -175,13 +175,17 @@ const { res, err, data } = await api.imagepress.v0.postBaselineDistribute({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getBaselineDistributeStatus({
-  imageId: {
-    type: String
+  imageIds: {
+    type: Array
     required: true
   },
-  region: {
-    type: String
+  regions: {
+    type: Array
     required: true
+  },
+  count: {
+    type: Number
+    required: false
   },
   id: {
     type: String
@@ -559,29 +563,14 @@ const { res, err, data } = await api.imagepress.v0.postSource({
     type: String
     required: true
   },
-  tags: {
-    type: Array
-    default: 
-  },
-  accounts: {
-    type: Array
-    default: 
-  },
   type: {
     type: String
     required: true
     match: /s3|ami/
   },
-  description: {
-    type: String
-  },
   provider: {
     type: String
     default: aws
-  },
-  makePublic: {
-    type: Boolean
-    default: false
   },
 })
 ```

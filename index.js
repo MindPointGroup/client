@@ -129,8 +129,9 @@ validators['baseline_distribute'] = async ({ path, method, body, mock }) => {
 
 validators['baseline_distro_status'] = async ({ path, method, body, mock }) => {
   const props = {
-    imageId: { type: 'String', required: true },
-    region: { type: 'String', required: true },
+    imageIds: { type: 'Array', required: true },
+    regions: { type: 'Array', required: true },
+    count: { type: 'Number', required: false },
     id: { type: 'String', required: true }
   }
 
@@ -470,12 +471,8 @@ validators['source_import'] = async ({ path, method, body, mock }) => {
     cloudcredentialid: { type: 'String', required: true },
     region: { type: 'String', required: true },
     imageId: { type: 'String' },
-    tags: { type: 'Array', default: [] },
-    accounts: { type: 'Array', default: [] },
     type: { type: 'String', required: true, match: /s3|ami/ },
-    description: { type: 'String' },
-    provider: { type: 'String', default: 'aws' },
-    makePublic: { type: 'Boolean', default: false }
+    provider: { type: 'String', default: 'aws' }
   }
 
   if (body.type === 's3') {
