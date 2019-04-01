@@ -470,7 +470,7 @@ validators['source_import'] = async ({ path, method, body, mock }) => {
     name: { type: 'String', required: true },
     cloudcredentialid: { type: 'String', required: true },
     imageId: { type: 'String' },
-    type: { type: 'String', required: true, match: /s3|ami/ },
+    type: { type: 'String', default: 'ami', match: /s3|ami/ },
     provider: { type: 'String', default: 'aws' }
   }
 
@@ -489,14 +489,6 @@ validators['source_import'] = async ({ path, method, body, mock }) => {
   const r = validateProps(props, body, mock)
 
   if (mock) return r
-
-  const tags = []
-
-  if (r.tags) {
-    Object.keys(r.tags).map(k => {
-      tags.push({ Key: k, Value: r.tags[k] })
-    })
-  }
 
   if (r.type === 's3') { // then it _must_ be an S3 import
     let i = r.diskContainers.length

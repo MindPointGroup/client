@@ -561,7 +561,7 @@ const { res, err, data } = await api.imagepress.v0.postSource({
   },
   type: {
     type: String
-    required: true
+    default: ami
     match: /s3|ami/
   },
   provider: {
