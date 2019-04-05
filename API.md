@@ -352,7 +352,7 @@ const { res, err, data } = await api.imagepress.v0.postCredentialsGit({
   },
   password: {
     type: String
-    required: true
+    required: false
   },
   name: {
     type: String

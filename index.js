@@ -52,7 +52,7 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
 
   const r = validateProps(props, body, mock)
 
-  if (mock) return r
+  if (mock || r.err) return r
 
   if (typeof r.data.permissions.private !== 'boolean') {
     return { err: { 'permissions.private': 'Boolean required' } }
@@ -84,6 +84,7 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
       if (!repo.id) { // ref id of repo object
         return { err: { [`reposList[${index}].id`]: 'Property required' } }
       }
+
       if (!Array.isArray(repo.scripts)) {
         return { err: { [`reposList[${index}].scripts`]: 'Expected an array' } }
       }
@@ -273,7 +274,7 @@ validators['credentials_save'] = async ({ path, method, body, mock }) => {
       props.key = { type: 'String', required: false }
     } else {
       props.username = { type: 'String', required: true }
-      props.password = { type: 'String', required: true }
+      props.password = { type: 'String', required: false }
     }
   }
 
@@ -310,7 +311,7 @@ validators['credentials_save'] = async ({ path, method, body, mock }) => {
       props.key = { type: 'String', required: false }
     } else {
       props.username = { type: 'String', required: true }
-      props.password = { type: 'String', required: true }
+      props.password = { type: 'String', required: false }
     }
   }
 
