@@ -248,7 +248,8 @@ validators['credentials_list'] = async ({ path, method, body, mock }) => {
 
 validators['credentials_save'] = async ({ path, method, body, mock }) => {
   const props = {
-    type: { type: 'String', match: /aws|git/ }
+    type: { type: 'String', match: /aws|git/ },
+    name: { type: 'String', required: true }
   }
 
   if (path.includes('/aws')) {
@@ -266,26 +267,20 @@ validators['credentials_save'] = async ({ path, method, body, mock }) => {
     }
   }
 
-  if (path.includes('/git')) {
-    if (body.key && body.password) {
-      return { err: new Error('An ssh key and password were supplied, only one is allowed') }
-    }
-    if (body.key) {
-      props.key = { type: 'String', required: false }
-    } else {
-      props.username = { type: 'String', required: true }
-      props.password = { type: 'String', required: false }
-    }
+  if (path.includes('/git_key')) {
+    props.key = { type: 'String', required: true }
+  } else if (path.includes('/git')) {
+    props.username = { type: 'String', required: false }
+    props.password = { type: 'String', required: false }
   }
-
-  props.name = { type: 'String', required: true }
 
   return validateProps(props, body, mock)
 }
 
 validators['credentials_save'] = async ({ path, method, body, mock }) => {
   const props = {
-    type: { type: 'String', match: /aws|git/ }
+    type: { type: 'String', match: /aws|git/ },
+    name: { type: 'String', required: true }
   }
 
   if (path.includes('/aws')) {
@@ -303,19 +298,43 @@ validators['credentials_save'] = async ({ path, method, body, mock }) => {
     }
   }
 
-  if (path.includes('/git')) {
-    if (body.key && body.password) {
-      return { err: new Error('An ssh key and password were supplied, only one is allowed') }
+  if (path.includes('/git_key')) {
+    props.key = { type: 'String', required: true }
+  } else if (path.includes('/git')) {
+    props.username = { type: 'String', required: false }
+    props.password = { type: 'String', required: false }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['credentials_save'] = async ({ path, method, body, mock }) => {
+  const props = {
+    type: { type: 'String', match: /aws|git/ },
+    name: { type: 'String', required: true }
+  }
+
+  if (path.includes('/aws')) {
+    props.eid = { type: 'String', required: true }
+    props.arn = { type: 'String', required: true }
+
+    props['trust-policy'] = {
+      type: 'String',
+      required: true
     }
-    if (body.key) {
-      props.key = { type: 'String', required: false }
-    } else {
-      props.username = { type: 'String', required: true }
-      props.password = { type: 'String', required: false }
+
+    props['access-policy'] = {
+      type: 'String',
+      required: true
     }
   }
 
-  props.name = { type: 'String', required: true }
+  if (path.includes('/git_key')) {
+    props.key = { type: 'String', required: true }
+  } else if (path.includes('/git')) {
+    props.username = { type: 'String', required: false }
+    props.password = { type: 'String', required: false }
+  }
 
   return validateProps(props, body, mock)
 }
@@ -468,6 +487,7 @@ validators['source_get'] = async ({ path, method, body, mock }) => {
 
 validators['source_import'] = async ({ path, method, body, mock }) => {
   const props = {
+    id: { type: 'String', required: false },
     name: { type: 'String', required: true },
     cloudcredentialid: { type: 'String', required: true },
     imageId: { type: 'String' },
@@ -490,7 +510,7 @@ validators['source_import'] = async ({ path, method, body, mock }) => {
 
   const r = validateProps(props, body, mock)
 
-  if (mock) return r
+  if (mock || r.err) return r
 
   if (r.type === 's3') { // then it _must_ be an S3 import
     let i = r.diskContainers.length
@@ -782,6 +802,18 @@ api.imagepress.v0.postCredentialsAws = async body => {
 
 api.imagepress.v0.postCredentialsGit = async body => {
   const path = 'v0/credentials/git'
+
+  // Request
+  const params = {
+    method: 'POST',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.postCredentialsGit_key = async body => {
+  const path = 'v0/credentials/git_key'
 
   // Request
   const params = {
