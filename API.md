@@ -311,6 +311,10 @@ const { res, err, data } = await api.imagepress.v0.getCredentials({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postCredentialsAws({
+  id: {
+    type: String
+    required: false
+  },
   type: {
     type: String
     match: /aws|git/
@@ -342,6 +346,10 @@ const { res, err, data } = await api.imagepress.v0.postCredentialsAws({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postCredentialsGit({
+  id: {
+    type: String
+    required: false
+  },
   type: {
     type: String
     match: /aws|git/
@@ -365,6 +373,10 @@ const { res, err, data } = await api.imagepress.v0.postCredentialsGit({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postCredentialsGit_key({
+  id: {
+    type: String
+    required: false
+  },
   type: {
     type: String
     match: /aws|git/
