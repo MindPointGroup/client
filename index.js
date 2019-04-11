@@ -248,7 +248,7 @@ validators['credentials_list'] = async ({ path, method, body, mock }) => {
 
 validators['credentials_save'] = async ({ path, method, body, mock }) => {
   const props = {
-    id: { type: 'String', required: 'false' },
+    id: { type: 'String', required: false },
     type: { type: 'String', match: /aws|git/ },
     name: { type: 'String', required: true }
   }
@@ -280,7 +280,7 @@ validators['credentials_save'] = async ({ path, method, body, mock }) => {
 
 validators['credentials_save'] = async ({ path, method, body, mock }) => {
   const props = {
-    id: { type: 'String', required: 'false' },
+    id: { type: 'String', required: false },
     type: { type: 'String', match: /aws|git/ },
     name: { type: 'String', required: true }
   }
@@ -312,7 +312,7 @@ validators['credentials_save'] = async ({ path, method, body, mock }) => {
 
 validators['credentials_save'] = async ({ path, method, body, mock }) => {
   const props = {
-    id: { type: 'String', required: 'false' },
+    id: { type: 'String', required: false },
     type: { type: 'String', match: /aws|git/ },
     name: { type: 'String', required: true }
   }
