@@ -15,7 +15,9 @@
   },
   "scripts": {
     "test": "standard && node test.js",
-    "compile": "./bin/compile"
+    "compile": "./bin/compile",
+    "sync": "./bin/sync",
+    "all": "npm run compile && npm run sync && echo \"Remember to commit and push\""
   },
   "config": {
     "org": "MindPointGroup",

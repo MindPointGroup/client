@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 // vim: set syntax=javascript:
 
-const debug = require('debug')
 const { config } = require('../package.json')
-const get = require('../src/get');
-
+const get = require('../src/get')
+const { env } = require('process');
 
 (async () => {
-   console.log('building client...')
-   await get(config) 
-   console.log('done')
+  if (!env.TOKEN) {
+    throw new Error('TOKEN environment variable required')
+  }
+  console.log('building client...')
+  await get(config)
+  console.log('done')
 })()
