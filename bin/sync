@@ -1,0 +1,12 @@
+#!/bin/bash -e
+#vim: set syntax=bash:
+
+if [[ ${NODE_ENV} = "production" ]]; then
+  echo "Production Sync"
+  aws s3 cp index.js s3://imgpress-client-production --acl public-read --profile imgpress-prod-admin
+else
+  echo "Dev Sync"
+  aws s3 cp index.js s3://imgpress-client-dev --acl public-read
+fi
+
+echo "Syncing index.js complete"
