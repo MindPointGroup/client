@@ -199,41 +199,6 @@ validators['baseline_delete'] = async ({ path, method, body, mock }) => {
   return validateProps(props, body, mock)
 }
 
-validators['bucket_list'] = async ({ path, method, body, mock }) => {
-  const props = {
-    id: { type: 'String', required: true } // cred ref id
-  }
-
-  return validateProps(props, body, mock)
-}
-
-validators['bucket_objects'] = async ({ path, method, body, mock }) => {
-  const props = {
-    bucket: { type: 'String', required: true },
-    region: { type: 'String', required: true },
-    id: { type: 'String', required: true } // cred ref id
-  }
-
-  return validateProps(props, body, mock)
-}
-
-validators['bucket_region'] = async ({ path, method, body, mock }) => {
-  const props = {
-    bucket: { type: 'String', required: true },
-    id: { type: 'String', required: true } // cred ref id
-  }
-
-  return validateProps(props, body, mock)
-}
-
-validators['bucket_regions'] = async ({ path, method, body, mock }) => {
-  const props = {
-    id: { type: 'String', required: true } // cred ref id
-  }
-
-  return validateProps(props, body, mock)
-}
-
 validators['credentials_delete'] = async ({ path, method, body, mock }) => {
   const props = {
     id: { type: 'String', required: true }
@@ -488,64 +453,6 @@ validators['source_get'] = async ({ path, method, body, mock }) => {
   return validateProps(props, body, mock)
 }
 
-validators['source_import'] = async ({ path, method, body, mock }) => {
-  const props = {
-    id: { type: 'String', required: false },
-    name: { type: 'String', required: true },
-    cloudcredentialid: { type: 'String', required: true },
-    imageId: { type: 'String' },
-    type: { type: 'String', default: 'ami', match: /s3|ami/ },
-    provider: { type: 'String', default: 'aws' }
-  }
-
-  if (body.type === 's3') {
-    props.architecture = { type: 'String', required: true }
-    props.platform = { type: 'String', required: true }
-    props.diskContainers = {
-      type: 'Array',
-      required: true,
-      resolve: value => value.length > 0
-    }
-  } else {
-    props.region = { type: 'String', default: 'us-east-1' }
-    props.imageId = { ...props.imageId, required: true }
-  }
-
-  const r = validateProps(props, body, mock)
-
-  if (mock || r.err) return r
-
-  if (r.type === 's3') { // then it _must_ be an S3 import
-    let i = r.diskContainers.length
-
-    while (i--) {
-      const container = r.diskContainers[i]
-
-      if (typeof container !== 'object') {
-        return { err: { [`diskContainers[${i}]`]: 'Expected an object' } }
-      }
-
-      if (!container.Format) {
-        return { err: { [`diskContainers[${i}].Format`]: 'Property Required when type is "s3"' } }
-      }
-
-      if (typeof container.UserBucket !== 'object') {
-        return { err: { [`diskContainers[${i}].UserBucket`]: 'Property Required when type is "s3"' } }
-      }
-
-      if (!container.UserBucket.S3Bucket) {
-        return { err: { [`diskContainers[${i}].UserBucket.S3Bucket`]: 'Property Required when type is "s3"' } }
-      }
-
-      if (!container.UserBucket.S3Key) {
-        return { err: { [`diskContainers[${i}].UserBucket.S3Key`]: 'Property Required when type is "s3"' } }
-      }
-    }
-  }
-
-  return r
-}
-
 validators['source_delete'] = async ({ path, method, body, mock }) => {
   const props = {
     id: {
@@ -567,34 +474,6 @@ validators['source_update'] = async ({ path, method, body, mock }) => {
   }
 
   return validateProps(props, body, mock)
-}
-
-validators['source_import_status'] = async ({ path, method, body, mock }) => {
-  const props = {
-    imageTaskId: { type: 'String' },
-    imageId: { type: 'String' },
-    id: { type: 'String', required: true } // ref id of source
-  }
-
-  const r = validateProps(props, body, mock)
-
-  if (!r.imageTaskId && !r.imageId) {
-    return {
-      err: {
-        '[imageTaskId, imageId]': 'One is required'
-      }
-    }
-  }
-
-  if (r.imageTaskId && r.imageId) {
-    return {
-      err: {
-        '[imageTaskId, imageId]': 'One is required, both were supplied'
-      }
-    }
-  }
-
-  return r
 }
 
 validators['image_verify'] = async ({ path, method, body, mock }) => {
@@ -713,54 +592,6 @@ api.imagepress.v0.deleteBaselineDelete = async body => {
   // Request
   const params = {
     method: 'DELETE',
-    body
-  }
-
-  return fetch.request(path, params)
-}
-
-api.imagepress.v0.getBucketList = async body => {
-  const path = 'v0/bucket/list'
-
-  // Request
-  const params = {
-    method: 'GET',
-    body
-  }
-
-  return fetch.request(path, params)
-}
-
-api.imagepress.v0.getBucketObjects = async body => {
-  const path = 'v0/bucket/objects'
-
-  // Request
-  const params = {
-    method: 'GET',
-    body
-  }
-
-  return fetch.request(path, params)
-}
-
-api.imagepress.v0.getBucketRegion = async body => {
-  const path = 'v0/bucket/region'
-
-  // Request
-  const params = {
-    method: 'GET',
-    body
-  }
-
-  return fetch.request(path, params)
-}
-
-api.imagepress.v0.getBucketRegions = async body => {
-  const path = 'v0/bucket/regions'
-
-  // Request
-  const params = {
-    method: 'GET',
     body
   }
 
@@ -935,18 +766,6 @@ api.imagepress.v0.getSource = async body => {
   return fetch.request(path, params)
 }
 
-api.imagepress.v0.postSource = async body => {
-  const path = 'v0/source'
-
-  // Request
-  const params = {
-    method: 'POST',
-    body
-  }
-
-  return fetch.request(path, params)
-}
-
 api.imagepress.v0.deleteSource = async body => {
   const path = 'v0/source'
 
@@ -965,18 +784,6 @@ api.imagepress.v0.putSource = async body => {
   // Request
   const params = {
     method: 'PUT',
-    body
-  }
-
-  return fetch.request(path, params)
-}
-
-api.imagepress.v0.postSourceStatus = async body => {
-  const path = 'v0/source/status'
-
-  // Request
-  const params = {
-    method: 'POST',
     body
   }
 

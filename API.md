@@ -2,17 +2,15 @@
 
 1. <a href="#baseline">baseline</a>
 
-2. <a href="#bucket">bucket</a>
+2. <a href="#credentials">credentials</a>
 
-3. <a href="#credentials">credentials</a>
+3. <a href="#repo">repo</a>
 
-4. <a href="#repo">repo</a>
+4. <a href="#sources">sources</a>
 
-5. <a href="#sources">sources</a>
+5. <a href="#source">source</a>
 
-6. <a href="#source">source</a>
-
-7. <a href="#image">image</a>
+6. <a href="#image">image</a>
 
 ## baseline
 ### POST /v0/baseline/complete
@@ -224,63 +222,6 @@ const { res, err, data } = await api.imagepress.v0.deleteBaselineDeleteCopies({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.deleteBaselineDelete({
-  id: {
-    type: String
-    required: true
-  },
-})
-```
-
-## bucket
-### GET /v0/bucket/list
-
-```js
-const { res, err, data } = await api.imagepress.v0.getBucketList({
-  id: {
-    type: String
-    required: true
-  },
-})
-```
-
-### GET /v0/bucket/objects
-
-```js
-const { res, err, data } = await api.imagepress.v0.getBucketObjects({
-  bucket: {
-    type: String
-    required: true
-  },
-  region: {
-    type: String
-    required: true
-  },
-  id: {
-    type: String
-    required: true
-  },
-})
-```
-
-### GET /v0/bucket/region
-
-```js
-const { res, err, data } = await api.imagepress.v0.getBucketRegion({
-  bucket: {
-    type: String
-    required: true
-  },
-  id: {
-    type: String
-    required: true
-  },
-})
-```
-
-### GET /v0/bucket/regions
-
-```js
-const { res, err, data } = await api.imagepress.v0.getBucketRegions({
   id: {
     type: String
     required: true
@@ -574,42 +515,6 @@ const { res, err, data } = await api.imagepress.v0.getSource({
 })
 ```
 
-### POST /v0/source
-
-```js
-const { res, err, data } = await api.imagepress.v0.postSource({
-  id: {
-    type: String
-    required: false
-  },
-  name: {
-    type: String
-    required: true
-  },
-  cloudcredentialid: {
-    type: String
-    required: true
-  },
-  imageId: {
-    type: String
-    required: true
-  },
-  type: {
-    type: String
-    default: ami
-    match: /s3|ami/
-  },
-  provider: {
-    type: String
-    default: aws
-  },
-  region: {
-    type: String
-    default: us-east-1
-  },
-})
-```
-
 ### DELETE /v0/source
 
 ```js
@@ -643,12 +548,6 @@ const { res, err, data } = await api.imagepress.v0.putSource({
     default: 
   },
 })
-```
-
-### POST /v0/source/status
-
-```js
-const { res, err, data } = await api.imagepress.v0.postSourceStatus()
 ```
 
 ## image
