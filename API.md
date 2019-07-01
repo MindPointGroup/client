@@ -33,10 +33,6 @@ const { res, err, data } = await api.imagepress.v0.postBaselineComplete({
     type: String
     required: true
   },
-  name: {
-    type: String
-    required: true
-  },
   id: {
     type: String
     required: true
@@ -151,18 +147,6 @@ const { res, err, data } = await api.imagepress.v0.getBaselineBakeStatus({
 ```js
 const { res, err, data } = await api.imagepress.v0.postBaselineDistribute({
   id: {
-    type: String
-    required: true
-  },
-  sourceRegion: {
-    type: String
-    required: true
-  },
-  regions: {
-    type: Array
-    default: 
-  },
-  sourceImage: {
     type: String
     required: true
   },
@@ -353,26 +337,13 @@ const { res, err, data } = await api.imagepress.v0.postCredentialsVerify({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getRepoDownload({
-  repoUrl: {
-    type: String
-    required: true
-  },
   isTarball: {
     type: Boolean
     default: false
   },
-  cloudcredentialid: {
+  id: {
     type: String
     required: true
-  },
-  region: {
-    type: String
-    required: true
-    match: /ap-south-1|eu-west-3|eu-west-2|eu-west-1|ap-northeast-2|ap-northeast-1|sa-east-1|ca-central-1|ap-southeast-1|ap-southeast-2|eu-central-1|us-east-1|us-east-2|us-west-1|us-west-2/
-  },
-  repoBranch: {
-    type: String
-    default: HEAD
   },
 })
 ```
@@ -535,17 +506,44 @@ const { res, err, data } = await api.imagepress.v0.putSource({
     type: String
     required: true
   },
-  accounts: {
-    type: Array
-    default: 
+  name: {
+    type: String
+    required: false
   },
-  makePublic: {
-    type: Boolean
-    default: false
+  description: {
+    type: String
+    required: false
   },
-  tags: {
-    type: Array
-    default: 
+})
+```
+
+### POST /v0/source
+
+```js
+const { res, err, data } = await api.imagepress.v0.postSource({
+  id: {
+    type: String
+    required: false
+  },
+  name: {
+    type: String
+    required: true
+  },
+  cloudcredentialid: {
+    type: String
+    required: true
+  },
+  imageId: {
+    type: String
+    required: true
+  },
+  provider: {
+    type: String
+    default: aws
+  },
+  region: {
+    type: String
+    default: us-east-1
   },
 })
 ```

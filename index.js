@@ -20,7 +20,6 @@ validators['baseline_complete'] = async ({ path, method, body, mock }) => {
     status: { type: 'String', required: true },
     instanceId: { type: 'String', required: true },
     region: { type: 'String', required: true },
-    name: { type: 'String', required: true },
     id: { type: 'String', required: true } // baseline id
   }
 
@@ -119,10 +118,7 @@ validators['baseline_bake_status'] = async ({ path, method, body, mock }) => {
 
 validators['baseline_distribute'] = async ({ path, method, body, mock }) => {
   const props = {
-    id: { type: 'String', required: true },
-    sourceRegion: { type: 'String', required: true },
-    regions: { type: 'Array', default: [] },
-    sourceImage: { type: 'String', required: true }
+    id: { type: 'String', required: true }
   }
 
   return validateProps(props, body, mock)
@@ -321,20 +317,9 @@ validators['repo_download'] = async ({ path, method, body, mock }) => {
     return { err: { method: 'Must be GET' } }
   }
 
-  const match = new RegExp([
-    'ap-south-1', 'eu-west-3', 'eu-west-2',
-    'eu-west-1', 'ap-northeast-2', 'ap-northeast-1',
-    'sa-east-1', 'ca-central-1', 'ap-southeast-1',
-    'ap-southeast-2', 'eu-central-1', 'us-east-1',
-    'us-east-2', 'us-west-1', 'us-west-2'
-  ].join('|'))
-
   const props = {
-    repoUrl: { type: 'String', required: true },
     isTarball: { type: 'Boolean', default: false },
-    cloudcredentialid: { type: 'String', required: true },
-    region: { type: 'String', required: true, match },
-    repoBranch: { type: 'String', default: 'HEAD' }
+    id: { type: 'String', required: true }
   }
 
   return validateProps(props, body, mock)
@@ -468,12 +453,30 @@ validators['source_delete'] = async ({ path, method, body, mock }) => {
 validators['source_update'] = async ({ path, method, body, mock }) => {
   const props = {
     id: { type: 'String', required: true },
-    accounts: { type: 'Array', default: [] },
-    makePublic: { type: 'Boolean', default: false },
-    tags: { type: 'Array', default: [] }
+    name: { type: 'String', required: false },
+    description: { type: 'String', required: false }
   }
 
   return validateProps(props, body, mock)
+}
+
+validators['source_import'] = async ({ path, method, body, mock }) => {
+  const props = {
+    id: { type: 'String', required: false },
+    name: { type: 'String', required: true },
+    cloudcredentialid: { type: 'String', required: true },
+    imageId: { type: 'String' },
+    provider: { type: 'String', default: 'aws' }
+  }
+
+  props.region = { type: 'String', default: 'us-east-1' }
+  props.imageId = { ...props.imageId, required: true }
+
+  const r = validateProps(props, body, mock)
+
+  if (mock || r.err) return r
+
+  return r
 }
 
 validators['image_verify'] = async ({ path, method, body, mock }) => {
@@ -784,6 +787,18 @@ api.imagepress.v0.putSource = async body => {
   // Request
   const params = {
     method: 'PUT',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.postSource = async body => {
+  const path = 'v0/source'
+
+  // Request
+  const params = {
+    method: 'POST',
     body
   }
 
