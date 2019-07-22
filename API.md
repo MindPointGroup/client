@@ -12,6 +12,8 @@
 
 6. <a href="#image">image</a>
 
+7. <a href="#organization">organization</a>
+
 ## baseline
 ### POST /v0/baseline/complete
 
@@ -564,6 +566,63 @@ const { res, err, data } = await api.imagepress.v0.getImageVerify({
   id: {
     type: String
     required: true
+  },
+})
+```
+
+## organization
+### POST /v0/organization
+
+```js
+const { res, err, data } = await api.imagepress.v0.postOrganization({
+  members: {
+    type: Array
+    required: false
+  },
+  label: {
+    type: String
+    required: true
+  },
+})
+```
+
+### GET /v0/organization
+
+```js
+const { res, err, data } = await api.imagepress.v0.getOrganization({
+  id: {
+    type: String
+    required: true
+  },
+})
+```
+
+### DELETE /v0/organization
+
+```js
+const { res, err, data } = await api.imagepress.v0.deleteOrganization({
+  id: {
+    type: String
+    required: true
+  },
+})
+```
+
+### PUT /v0/organization
+
+```js
+const { res, err, data } = await api.imagepress.v0.putOrganization({
+  members: {
+    type: Array
+    required: false
+  },
+  id: {
+    type: String
+    required: true
+  },
+  label: {
+    type: String
+    required: false
   },
 })
 ```
