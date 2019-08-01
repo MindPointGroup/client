@@ -12,6 +12,10 @@
 
 6. <a href="#image">image</a>
 
+7. <a href="#user">user</a>
+
+8. <a href="#users">users</a>
+
 ## baseline
 ### POST /v0/baseline/complete
 
@@ -564,6 +568,68 @@ const { res, err, data } = await api.imagepress.v0.getImageVerify({
   id: {
     type: String
     required: true
+  },
+})
+```
+
+## user
+### GET /v0/user
+
+```js
+const { res, err, data } = await api.imagepress.v0.getUser({
+})
+```
+
+## users
+### GET /v0/users/list
+
+```js
+const { res, err, data } = await api.imagepress.v0.getUsersList({
+})
+```
+
+### DELETE /v0/users
+
+```js
+const { res, err, data } = await api.imagepress.v0.deleteUsers({
+})
+```
+
+### PUT /v0/users
+
+```js
+const { res, err, data } = await api.imagepress.v0.putUsers({
+})
+```
+
+### POST /v0/users
+
+```js
+const { res, err, data } = await api.imagepress.v0.postUsers({
+  id: {
+    type: String
+  },
+  orgid: {
+    required: true
+    type: String
+  },
+  orgowner: {
+    type: Boolean
+  },
+  email: {
+    type: String
+  },
+  phone: {
+    type: String
+  },
+  first: {
+    type: String
+  },
+  last: {
+    type: String
+  },
+  company: {
+    type: String
   },
 })
 ```

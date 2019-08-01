@@ -489,6 +489,111 @@ validators['image_verify'] = async ({ path, method, body, mock }) => {
   return validateProps(props, body, mock)
 }
 
+validators['users'] = async ({ path, method, body, mock }) => {
+  let props = {}
+
+  if (method === 'POST') {
+    props.id = { type: 'String' }
+    props.orgid = { required: true, type: 'String' }
+    props.orgowner = { type: 'Boolean' }
+    props.email = { type: 'String' }
+    props.phone = { type: 'String' }
+    props.first = { type: 'String' }
+    props.last = { type: 'String' }
+    props.company = { type: 'String' }
+  } else if (method === 'GET') {
+    props.id = { type: 'String' }
+    props.orgid = { required: true, type: 'String' }
+    props.orgowner = { type: 'Boolean' }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['users'] = async ({ path, method, body, mock }) => {
+  let props = {}
+
+  if (method === 'POST') {
+    props.id = { type: 'String' }
+    props.orgid = { required: true, type: 'String' }
+    props.orgowner = { type: 'Boolean' }
+    props.email = { type: 'String' }
+    props.phone = { type: 'String' }
+    props.first = { type: 'String' }
+    props.last = { type: 'String' }
+    props.company = { type: 'String' }
+  } else if (method === 'GET') {
+    props.id = { type: 'String' }
+    props.orgid = { required: true, type: 'String' }
+    props.orgowner = { type: 'Boolean' }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['users'] = async ({ path, method, body, mock }) => {
+  let props = {}
+
+  if (method === 'POST') {
+    props.id = { type: 'String' }
+    props.orgid = { required: true, type: 'String' }
+    props.orgowner = { type: 'Boolean' }
+    props.email = { type: 'String' }
+    props.phone = { type: 'String' }
+    props.first = { type: 'String' }
+    props.last = { type: 'String' }
+    props.company = { type: 'String' }
+  } else if (method === 'GET') {
+    props.id = { type: 'String' }
+    props.orgid = { required: true, type: 'String' }
+    props.orgowner = { type: 'Boolean' }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['users'] = async ({ path, method, body, mock }) => {
+  let props = {}
+
+  if (method === 'POST') {
+    props.id = { type: 'String' }
+    props.orgid = { required: true, type: 'String' }
+    props.orgowner = { type: 'Boolean' }
+    props.email = { type: 'String' }
+    props.phone = { type: 'String' }
+    props.first = { type: 'String' }
+    props.last = { type: 'String' }
+    props.company = { type: 'String' }
+  } else if (method === 'GET') {
+    props.id = { type: 'String' }
+    props.orgid = { required: true, type: 'String' }
+    props.orgowner = { type: 'Boolean' }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['users'] = async ({ path, method, body, mock }) => {
+  let props = {}
+
+  if (method === 'POST') {
+    props.id = { type: 'String' }
+    props.orgid = { required: true, type: 'String' }
+    props.orgowner = { type: 'Boolean' }
+    props.email = { type: 'String' }
+    props.phone = { type: 'String' }
+    props.first = { type: 'String' }
+    props.last = { type: 'String' }
+    props.company = { type: 'String' }
+  } else if (method === 'GET') {
+    props.id = { type: 'String' }
+    props.orgid = { required: true, type: 'String' }
+    props.orgowner = { type: 'Boolean' }
+  }
+
+  return validateProps(props, body, mock)
+}
+
 api.imagepress = {
   'v0': {}
 }
@@ -811,6 +916,66 @@ api.imagepress.v0.getImageVerify = async body => {
   // Request
   const params = {
     method: 'GET',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.getUser = async body => {
+  const path = 'v0/user'
+
+  // Request
+  const params = {
+    method: 'GET',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.getUsersList = async body => {
+  const path = 'v0/users/list'
+
+  // Request
+  const params = {
+    method: 'GET',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.deleteUsers = async body => {
+  const path = 'v0/users'
+
+  // Request
+  const params = {
+    method: 'DELETE',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.putUsers = async body => {
+  const path = 'v0/users'
+
+  // Request
+  const params = {
+    method: 'PUT',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.postUsers = async body => {
+  const path = 'v0/users'
+
+  // Request
+  const params = {
+    method: 'POST',
     body
   }
 

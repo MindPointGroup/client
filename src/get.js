@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path')
 const fetch = require('./fetch')
 const compile = require('./compile')
 const pkg = require('../package.json')
@@ -29,7 +30,7 @@ async function getRepos () {
   return { data: repos }
 }
 
-async function getRepoSync (repo) {
+async function getRepoSync (repo, branch) {
   let exists = true
   let args = null
   const opts = {}
@@ -40,6 +41,8 @@ async function getRepoSync (repo) {
     exists = false
   }
 
+  const target = `${__dirname}/../tmp/${repo.name}`
+
   if (exists) {
     args = [
       `pull`,
@@ -48,28 +51,41 @@ async function getRepoSync (repo) {
       'master'
     ]
 
-    opts.cwd = `${__dirname}/../tmp/${repo.name}`
+    opts.cwd = target 
   } else {
     args = [
       `clone`,
-      `--depth=1`,
       `ssh://git@github.com/${pkg.config.org}/${repo.name}`,
       `tmp/${repo.name}`
     ]
   }
 
-  console.log(` INFO │ Analyzing ${repo.name}`)
-  const r = spawnSync('git', args, opts)
+  {
+    console.log(` INFO │ Analyzing ${repo.name}`)
+    const r = spawnSync('git', args, opts)
 
-  if (r.status > 0) {
-    console.log(`  ERR │ ${r.stderr.toString()}`)
-    process.exit(r.status)
+    if (r.status > 0) {
+      console.log(`  ERR │ ${r.stderr.toString()}`)
+      process.exit(r.status)
+    }
+  }
+
+  {
+    opts.cwd = target
+    console.log(` INFO │ Checking out ${branch}`)
+    const r = spawnSync('git', ['checkout', branch], opts)
+
+    if (r.status > 0) {
+      console.log(`  ERR │ ${r.stderr.toString()}`)
+      process.exit(r.status)
+    }
   }
 }
 
 module.exports = async (args = {}) => {
   const {
-    pattern
+    pattern,
+    branch
   } = args
 
   const { err, data: repos } = await getRepos()
@@ -90,18 +106,22 @@ module.exports = async (args = {}) => {
       continue
     }
 
-    await getRepoSync(repo)
+    await getRepoSync(repo, branch)
 
     let def = null
 
     try {
-      def = require(`../tmp/${repo.name}/api.js`)
+      def = require(path.resolve(`tmp/${repo.name}/api.js`))
     } catch (err) {
+      if (!err.message.includes('find module')) {
+        console.warn(` WARN │ ${err.message}.`)
+      }
     }
 
     try {
-      def = require(`../tmp/${repo.name}/api/index.js`)
+      def = require(path.resolve(`tmp/${repo.name}/api/index.js`))
     } catch (err) {
+      console.warn(` WARN │ ${err.message}.`)
     }
 
     if (!def) {

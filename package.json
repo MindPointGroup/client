@@ -7,7 +7,8 @@
     "aws-amplify": "^1.1.18",
     "debug": "^4.1.0",
     "fetch": "github:MindPointGroup/fetch",
-    "node-fetch": "^2.3.0"
+    "node-fetch": "^2.3.0",
+    "rimraf": "^2.6.3"
   },
   "devDependencies": {
     "standard": "^12.0.1",
@@ -22,7 +23,8 @@
   "config": {
     "org": "MindPointGroup",
     "pattern": "image-press-serverless",
-    "url": "https://api.dev.imgpress.io"
+    "url": "https://api.dev.imgpress.io",
+    "branch": "rbac"
   },
   "repository": {
     "type": "git",
