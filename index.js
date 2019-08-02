@@ -489,6 +489,56 @@ validators['image_verify'] = async ({ path, method, body, mock }) => {
   return validateProps(props, body, mock)
 }
 
+validators['organization_set'] = async ({ path, method, body, mock }) => {
+  let props = {
+    members: { type: 'Array', required: false }
+  }
+
+  if (method === 'POST') {
+    props.label = { type: 'String', required: true }
+  }
+
+  if (method === 'PUT') {
+    props.id = { type: 'String', required: true }
+    props.label = { type: 'String', required: false }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['organization_get'] = async ({ path, method, body, mock }) => {
+  const props = {
+    id: { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['organization_delete'] = async ({ path, method, body, mock }) => {
+  const props = {
+    id: { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['organization_set'] = async ({ path, method, body, mock }) => {
+  let props = {
+    members: { type: 'Array', required: false }
+  }
+
+  if (method === 'POST') {
+    props.label = { type: 'String', required: true }
+  }
+
+  if (method === 'PUT') {
+    props.id = { type: 'String', required: true }
+    props.label = { type: 'String', required: false }
+  }
+
+  return validateProps(props, body, mock)
+}
+
 validators['users'] = async ({ path, method, body, mock }) => {
   let props = {}
 
@@ -916,6 +966,54 @@ api.imagepress.v0.getImageVerify = async body => {
   // Request
   const params = {
     method: 'GET',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.postOrganization = async body => {
+  const path = 'v0/organization'
+
+  // Request
+  const params = {
+    method: 'POST',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.getOrganization = async body => {
+  const path = 'v0/organization'
+
+  // Request
+  const params = {
+    method: 'GET',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.deleteOrganization = async body => {
+  const path = 'v0/organization'
+
+  // Request
+  const params = {
+    method: 'DELETE',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.putOrganization = async body => {
+  const path = 'v0/organization'
+
+  // Request
+  const params = {
+    method: 'PUT',
     body
   }
 
