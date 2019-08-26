@@ -14,6 +14,12 @@
 
 7. <a href="#organization">organization</a>
 
+8. <a href="#api_key">api_key</a>
+
+9. <a href="#api_keys">api_keys</a>
+
+10. <a href="#api_key">api_key</a>
+
 ## baseline
 ### POST /v0/baseline/complete
 
@@ -623,6 +629,49 @@ const { res, err, data } = await api.imagepress.v0.putOrganization({
   label: {
     type: String
     required: false
+  },
+})
+```
+
+## api_key
+### POST /v0/api_key/create
+
+```js
+const { res, err, data } = await api.imagepress.v0.postApi_keyCreate({
+  label: {
+    type: String
+    required: true
+  },
+})
+```
+
+### DELETE /v0/api_key/delete
+
+```js
+const { res, err, data } = await api.imagepress.v0.deleteApi_keyDelete({
+  id: {
+    type: String
+    required: true
+  },
+})
+```
+
+## api_keys
+### GET /v0/api_keys
+
+```js
+const { res, err, data } = await api.imagepress.v0.getApi_keys({
+})
+```
+
+## api_key
+### GET /v0/api_key
+
+```js
+const { res, err, data } = await api.imagepress.v0.getApi_key({
+  id: {
+    type: String
+    required: true
   },
 })
 ```

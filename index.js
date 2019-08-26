@@ -539,6 +539,36 @@ validators['organization_set'] = async ({ path, method, body, mock }) => {
   return validateProps(props, body, mock)
 }
 
+validators['api_key_create'] = async ({ path, method, body, mock }) => {
+  const props = {
+    label: { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['api_key_delete'] = async ({ path, method, body, mock }) => {
+  const props = {
+    id: { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['api_keys_list'] = async ({ path, method, body, mock }) => {
+  const props = {}
+
+  return validateProps(props, body, mock)
+}
+
+validators['api_key_get'] = async ({ path, method, body, mock }) => {
+  const props = {
+    id: { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
 api.imagepress = {
   'v0': {}
 }
@@ -909,6 +939,54 @@ api.imagepress.v0.putOrganization = async body => {
   // Request
   const params = {
     method: 'PUT',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.postApi_keyCreate = async body => {
+  const path = 'v0/api_key/create'
+
+  // Request
+  const params = {
+    method: 'POST',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.deleteApi_keyDelete = async body => {
+  const path = 'v0/api_key/delete'
+
+  // Request
+  const params = {
+    method: 'DELETE',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.getApi_keys = async body => {
+  const path = 'v0/api_keys'
+
+  // Request
+  const params = {
+    method: 'GET',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.getApi_key = async body => {
+  const path = 'v0/api_key'
+
+  // Request
+  const params = {
+    method: 'GET',
     body
   }
 
