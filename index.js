@@ -490,7 +490,7 @@ validators['image_verify'] = async ({ path, method, body, mock }) => {
 }
 
 validators['organization_set'] = async ({ path, method, body, mock }) => {
-  let props = {
+  const props = {
     members: { type: 'Array', required: false }
   }
 
@@ -523,7 +523,7 @@ validators['organization_delete'] = async ({ path, method, body, mock }) => {
 }
 
 validators['organization_set'] = async ({ path, method, body, mock }) => {
-  let props = {
+  const props = {
     members: { type: 'Array', required: false }
   }
 
@@ -534,6 +534,14 @@ validators['organization_set'] = async ({ path, method, body, mock }) => {
   if (method === 'PUT') {
     props.id = { type: 'String', required: true }
     props.label = { type: 'String', required: false }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['organization_users'] = async ({ path, method, body, mock }) => {
+  const props = {
+    id: { type: 'String', required: true }
   }
 
   return validateProps(props, body, mock)
@@ -564,6 +572,19 @@ validators['api_keys_list'] = async ({ path, method, body, mock }) => {
 validators['api_key_get'] = async ({ path, method, body, mock }) => {
   const props = {
     id: { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['rbac_user'] = async ({ path, method, body, mock }) => {
+  if (method !== 'POST') {
+    return { err: { method: `Expected POST, received ${method}` } }
+  }
+
+  const props = {
+    id: { type: 'String', required: true }, // userid of user being modified
+    roleid: { type: 'Number', required: true }
   }
 
   return validateProps(props, body, mock)
@@ -945,6 +966,18 @@ api.imagepress.v0.putOrganization = async body => {
   return fetch.request(path, params)
 }
 
+api.imagepress.v0.getOrganizationUsers = async body => {
+  const path = 'v0/organization/users'
+
+  // Request
+  const params = {
+    method: 'GET',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
 api.imagepress.v0.postApi_keyCreate = async body => {
   const path = 'v0/api_key/create'
 
@@ -987,6 +1020,18 @@ api.imagepress.v0.getApi_key = async body => {
   // Request
   const params = {
     method: 'GET',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.postRbacUser = async body => {
+  const path = 'v0/rbac/user'
+
+  // Request
+  const params = {
+    method: 'POST',
     body
   }
 
