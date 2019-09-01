@@ -491,7 +491,9 @@ validators['image_verify'] = async ({ path, method, body, mock }) => {
 
 validators['organization_set'] = async ({ path, method, body, mock }) => {
   const props = {
-    members: { type: 'Array', required: false }
+    members: { type: 'Array', required: false },
+    resetUser: { type: 'Boolean', required: false },
+    id: { type: 'String', required: false }
   }
 
   if (method === 'POST') {
@@ -499,11 +501,20 @@ validators['organization_set'] = async ({ path, method, body, mock }) => {
   }
 
   if (method === 'PUT') {
-    props.id = { type: 'String', required: true }
+    props.id.required = true
     props.label = { type: 'String', required: false }
   }
 
-  return validateProps(props, body, mock)
+  const r = validateProps(props, body, mock)
+
+  if (r.resetUser && r.members) {
+    return { err: { mutuallyExclusive: 'resetUser and members' } }
+  }
+
+  if (r.resetUser && r.id) {
+    return { err: { mutuallyExclusive: 'resetUser and id' } }
+  }
+  return r
 }
 
 validators['organization_get'] = async ({ path, method, body, mock }) => {
@@ -524,7 +535,9 @@ validators['organization_delete'] = async ({ path, method, body, mock }) => {
 
 validators['organization_set'] = async ({ path, method, body, mock }) => {
   const props = {
-    members: { type: 'Array', required: false }
+    members: { type: 'Array', required: false },
+    resetUser: { type: 'Boolean', required: false },
+    id: { type: 'String', required: false }
   }
 
   if (method === 'POST') {
@@ -532,11 +545,20 @@ validators['organization_set'] = async ({ path, method, body, mock }) => {
   }
 
   if (method === 'PUT') {
-    props.id = { type: 'String', required: true }
+    props.id.required = true
     props.label = { type: 'String', required: false }
   }
 
-  return validateProps(props, body, mock)
+  const r = validateProps(props, body, mock)
+
+  if (r.resetUser && r.members) {
+    return { err: { mutuallyExclusive: 'resetUser and members' } }
+  }
+
+  if (r.resetUser && r.id) {
+    return { err: { mutuallyExclusive: 'resetUser and id' } }
+  }
+  return r
 }
 
 validators['organization_users'] = async ({ path, method, body, mock }) => {

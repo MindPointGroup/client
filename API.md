@@ -587,6 +587,14 @@ const { res, err, data } = await api.imagepress.v0.postOrganization({
     type: Array
     required: false
   },
+  resetUser: {
+    type: Boolean
+    required: false
+  },
+  id: {
+    type: String
+    required: false
+  },
   label: {
     type: String
     required: true
@@ -622,6 +630,10 @@ const { res, err, data } = await api.imagepress.v0.deleteOrganization({
 const { res, err, data } = await api.imagepress.v0.putOrganization({
   members: {
     type: Array
+    required: false
+  },
+  resetUser: {
+    type: Boolean
     required: false
   },
   id: {
