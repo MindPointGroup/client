@@ -20,7 +20,9 @@
 
 10. <a href="#api_key">api_key</a>
 
-11. <a href="#rbac">rbac</a>
+11. <a href="#users">users</a>
+
+12. <a href="#user">user</a>
 
 ## baseline
 ### POST /v0/baseline/complete
@@ -647,17 +649,6 @@ const { res, err, data } = await api.imagepress.v0.putOrganization({
 })
 ```
 
-### GET /v0/organization/users
-
-```js
-const { res, err, data } = await api.imagepress.v0.getOrganizationUsers({
-  id: {
-    type: String
-    required: true
-  },
-})
-```
-
 ## api_key
 ### POST /v0/api_key/create
 
@@ -701,11 +692,23 @@ const { res, err, data } = await api.imagepress.v0.getApi_key({
 })
 ```
 
-## rbac
-### POST /v0/rbac/user
+## users
+### GET /v0/users
 
 ```js
-const { res, err, data } = await api.imagepress.v0.postRbacUser({
+const { res, err, data } = await api.imagepress.v0.getUsers({
+  id: {
+    type: String
+    required: true
+  },
+})
+```
+
+## user
+### POST /v0/user/role
+
+```js
+const { res, err, data } = await api.imagepress.v0.postUserRole({
   id: {
     type: String
     required: true

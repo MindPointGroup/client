@@ -561,14 +561,6 @@ validators['organization_set'] = async ({ path, method, body, mock }) => {
   return r
 }
 
-validators['organization_users'] = async ({ path, method, body, mock }) => {
-  const props = {
-    id: { type: 'String', required: true }
-  }
-
-  return validateProps(props, body, mock)
-}
-
 validators['api_key_create'] = async ({ path, method, body, mock }) => {
   const props = {
     label: { type: 'String', required: true }
@@ -599,7 +591,15 @@ validators['api_key_get'] = async ({ path, method, body, mock }) => {
   return validateProps(props, body, mock)
 }
 
-validators['rbac_user'] = async ({ path, method, body, mock }) => {
+validators['users_list'] = async ({ path, method, body, mock }) => {
+  const props = {
+    id: { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['user_role'] = async ({ path, method, body, mock }) => {
   if (method !== 'POST') {
     return { err: { method: `Expected POST, received ${method}` } }
   }
@@ -988,18 +988,6 @@ api.imagepress.v0.putOrganization = async body => {
   return fetch.request(path, params)
 }
 
-api.imagepress.v0.getOrganizationUsers = async body => {
-  const path = 'v0/organization/users'
-
-  // Request
-  const params = {
-    method: 'GET',
-    body
-  }
-
-  return fetch.request(path, params)
-}
-
 api.imagepress.v0.postApi_keyCreate = async body => {
   const path = 'v0/api_key/create'
 
@@ -1048,8 +1036,20 @@ api.imagepress.v0.getApi_key = async body => {
   return fetch.request(path, params)
 }
 
-api.imagepress.v0.postRbacUser = async body => {
-  const path = 'v0/rbac/user'
+api.imagepress.v0.getUsers = async body => {
+  const path = 'v0/users'
+
+  // Request
+  const params = {
+    method: 'GET',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.postUserRole = async body => {
+  const path = 'v0/user/role'
 
   // Request
   const params = {
