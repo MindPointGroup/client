@@ -585,10 +585,6 @@ const { res, err, data } = await api.imagepress.v0.getImageVerify({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postOrganization({
-  members: {
-    type: Array
-    required: false
-  },
   resetUser: {
     type: Boolean
     required: false
@@ -630,10 +626,6 @@ const { res, err, data } = await api.imagepress.v0.deleteOrganization({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.putOrganization({
-  members: {
-    type: Array
-    required: false
-  },
   resetUser: {
     type: Boolean
     required: false

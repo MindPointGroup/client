@@ -491,7 +491,6 @@ validators['image_verify'] = async ({ path, method, body, mock }) => {
 
 validators['organization_set'] = async ({ path, method, body, mock }) => {
   const props = {
-    members: { type: 'Array', required: false },
     resetUser: { type: 'Boolean', required: false },
     id: { type: 'String', required: false }
   }
@@ -506,10 +505,6 @@ validators['organization_set'] = async ({ path, method, body, mock }) => {
   }
 
   const r = validateProps(props, body, mock)
-
-  if (r.resetUser && r.members) {
-    return { err: { mutuallyExclusive: 'resetUser and members' } }
-  }
 
   if (r.resetUser && r.id) {
     return { err: { mutuallyExclusive: 'resetUser and id' } }
@@ -535,7 +530,6 @@ validators['organization_delete'] = async ({ path, method, body, mock }) => {
 
 validators['organization_set'] = async ({ path, method, body, mock }) => {
   const props = {
-    members: { type: 'Array', required: false },
     resetUser: { type: 'Boolean', required: false },
     id: { type: 'String', required: false }
   }
@@ -550,10 +544,6 @@ validators['organization_set'] = async ({ path, method, body, mock }) => {
   }
 
   const r = validateProps(props, body, mock)
-
-  if (r.resetUser && r.members) {
-    return { err: { mutuallyExclusive: 'resetUser and members' } }
-  }
 
   if (r.resetUser && r.id) {
     return { err: { mutuallyExclusive: 'resetUser and id' } }
