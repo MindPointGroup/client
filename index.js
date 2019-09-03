@@ -582,9 +582,7 @@ validators['api_key_get'] = async ({ path, method, body, mock }) => {
 }
 
 validators['users_list'] = async ({ path, method, body, mock }) => {
-  const props = {
-    id: { type: 'String', required: true }
-  }
+  const props = {}
 
   return validateProps(props, body, mock)
 }

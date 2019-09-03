@@ -689,10 +689,6 @@ const { res, err, data } = await api.imagepress.v0.getApi_key({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getUsers({
-  id: {
-    type: String
-    required: true
-  },
 })
 ```
 
