@@ -600,6 +600,56 @@ validators['user_role'] = async ({ path, method, body, mock }) => {
   return validateProps(props, body, mock)
 }
 
+validators['user_leave'] = async ({ path, method, body, mock }) => {
+  const props = {}
+
+  return validateProps(props, body, mock)
+}
+
+validators['invite_send'] = async ({ path, method, body, mock }) => {
+  if (path !== 'POST') {
+    return { err: { method: 'expected POST' } }
+  }
+  const props = {
+    email: { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['invite_accept'] = async ({ path, method, body, mock }) => {
+  const props = {
+    id: { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['invites_list'] = async ({ path, method, body, mock }) => {
+  const props = {
+    email: { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['invite_cancel'] = async ({ path, method, body, mock }) => {
+  if (path !== 'DELETE') {
+    return { err: { method: 'expected DELETE' } }
+  }
+  const props = {
+    id: { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['email_logger'] = async ({ path, method, body, mock }) => {
+  const props = {}
+
+  return validateProps(props, body, mock)
+}
+
 api.imagepress = {
   'v0': {}
 }
@@ -1038,6 +1088,78 @@ api.imagepress.v0.getUsers = async body => {
 
 api.imagepress.v0.postUserRole = async body => {
   const path = 'v0/user/role'
+
+  // Request
+  const params = {
+    method: 'POST',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.postUserLeave = async body => {
+  const path = 'v0/user/leave'
+
+  // Request
+  const params = {
+    method: 'POST',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.postInvite = async body => {
+  const path = 'v0/invite'
+
+  // Request
+  const params = {
+    method: 'POST',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.postInviteAccept = async body => {
+  const path = 'v0/invite/accept'
+
+  // Request
+  const params = {
+    method: 'POST',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.getInvites = async body => {
+  const path = 'v0/invites'
+
+  // Request
+  const params = {
+    method: 'GET',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.deleteInvite = async body => {
+  const path = 'v0/invite'
+
+  // Request
+  const params = {
+    method: 'DELETE',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.postPrivateEmailLog = async body => {
+  const path = 'v0/private/email/log'
 
   // Request
   const params = {

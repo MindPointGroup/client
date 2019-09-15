@@ -24,6 +24,14 @@
 
 12. <a href="#user">user</a>
 
+13. <a href="#invite">invite</a>
+
+14. <a href="#invites">invites</a>
+
+15. <a href="#invite">invite</a>
+
+16. <a href="#private">private</a>
+
 ## baseline
 ### POST /v0/baseline/complete
 
@@ -705,5 +713,57 @@ const { res, err, data } = await api.imagepress.v0.postUserRole({
     type: Number
     required: true
   },
+})
+```
+
+### POST /v0/user/leave
+
+```js
+const { res, err, data } = await api.imagepress.v0.postUserLeave({
+})
+```
+
+## invite
+### POST /v0/invite
+
+```js
+const { res, err, data } = await api.imagepress.v0.postInvite()
+```
+
+### POST /v0/invite/accept
+
+```js
+const { res, err, data } = await api.imagepress.v0.postInviteAccept({
+  id: {
+    type: String
+    required: true
+  },
+})
+```
+
+## invites
+### GET /v0/invites
+
+```js
+const { res, err, data } = await api.imagepress.v0.getInvites({
+  email: {
+    type: String
+    required: true
+  },
+})
+```
+
+## invite
+### DELETE /v0/invite
+
+```js
+const { res, err, data } = await api.imagepress.v0.deleteInvite()
+```
+
+## private
+### POST /v0/private/email/log
+
+```js
+const { res, err, data } = await api.imagepress.v0.postPrivateEmailLog({
 })
 ```
