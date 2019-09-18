@@ -607,9 +607,6 @@ validators['user_leave'] = async ({ path, method, body, mock }) => {
 }
 
 validators['invite_send'] = async ({ path, method, body, mock }) => {
-  if (path !== 'POST') {
-    return { err: { method: 'expected POST' } }
-  }
   const props = {
     email: { type: 'String', required: true }
   }
@@ -634,9 +631,6 @@ validators['invites_list'] = async ({ path, method, body, mock }) => {
 }
 
 validators['invite_cancel'] = async ({ path, method, body, mock }) => {
-  if (path !== 'DELETE') {
-    return { err: { method: 'expected DELETE' } }
-  }
   const props = {
     id: { type: 'String', required: true }
   }

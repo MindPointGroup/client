@@ -727,7 +727,12 @@ const { res, err, data } = await api.imagepress.v0.postUserLeave({
 ### POST /v0/invite
 
 ```js
-const { res, err, data } = await api.imagepress.v0.postInvite()
+const { res, err, data } = await api.imagepress.v0.postInvite({
+  email: {
+    type: String
+    required: true
+  },
+})
 ```
 
 ### POST /v0/invite/accept
@@ -757,7 +762,12 @@ const { res, err, data } = await api.imagepress.v0.getInvites({
 ### DELETE /v0/invite
 
 ```js
-const { res, err, data } = await api.imagepress.v0.deleteInvite()
+const { res, err, data } = await api.imagepress.v0.deleteInvite({
+  id: {
+    type: String
+    required: true
+  },
+})
 ```
 
 ## private
