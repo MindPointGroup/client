@@ -623,11 +623,7 @@ validators['invite_accept'] = async ({ path, method, body, mock }) => {
 }
 
 validators['invites_list'] = async ({ path, method, body, mock }) => {
-  const props = {
-    email: { type: 'String', required: true }
-  }
-
-  return validateProps(props, body, mock)
+  return validateProps({}, body, mock)
 }
 
 validators['invite_cancel'] = async ({ path, method, body, mock }) => {

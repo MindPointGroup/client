@@ -751,10 +751,6 @@ const { res, err, data } = await api.imagepress.v0.postInviteAccept({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getInvites({
-  email: {
-    type: String
-    required: true
-  },
 })
 ```
 
