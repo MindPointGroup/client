@@ -766,6 +766,24 @@ const { res, err, data } = await api.imagepress.v0.deleteInvite({
 })
 ```
 
+### GET /v0/invite
+
+```js
+const { res, err, data } = await api.imagepress.v0.getInvite({
+  id: {
+    type: String
+    required: true
+  },
+})
+```
+
+### DELETE /v0/invite/decline
+
+```js
+const { res, err, data } = await api.imagepress.v0.deleteInviteDecline({
+})
+```
+
 ## private
 ### POST /v0/private/email/log
 

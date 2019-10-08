@@ -634,6 +634,20 @@ validators['invite_cancel'] = async ({ path, method, body, mock }) => {
   return validateProps(props, body, mock)
 }
 
+validators['invite_get'] = async ({ path, method, body, mock }) => {
+  const props = {
+    id: { type: 'String', required: true }
+  }
+
+  return validateProps(props, body, mock)
+}
+
+validators['invite_decline'] = async ({ path, method, body, mock }) => {
+  const props = {}
+
+  return validateProps(props, body, mock)
+}
+
 validators['email_logger'] = async ({ path, method, body, mock }) => {
   const props = {}
 
@@ -1138,6 +1152,30 @@ api.imagepress.v0.getInvites = async body => {
 
 api.imagepress.v0.deleteInvite = async body => {
   const path = 'v0/invite'
+
+  // Request
+  const params = {
+    method: 'DELETE',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.getInvite = async body => {
+  const path = 'v0/invite'
+
+  // Request
+  const params = {
+    method: 'GET',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.deleteInviteDecline = async body => {
+  const path = 'v0/invite/decline'
 
   // Request
   const params = {
