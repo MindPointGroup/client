@@ -623,7 +623,10 @@ validators['invite_accept'] = async ({ path, method, body, mock }) => {
 }
 
 validators['invites_list'] = async ({ path, method, body, mock }) => {
-  return validateProps({}, body, mock)
+  const props = {
+    mine: { type: 'Boolean', default: false }
+  }
+  return validateProps(props, body, mock)
 }
 
 validators['invite_cancel'] = async ({ path, method, body, mock }) => {
@@ -643,7 +646,9 @@ validators['invite_get'] = async ({ path, method, body, mock }) => {
 }
 
 validators['invite_decline'] = async ({ path, method, body, mock }) => {
-  const props = {}
+  const props = {
+    inviteid: { type: 'String', required: true }
+  }
 
   return validateProps(props, body, mock)
 }

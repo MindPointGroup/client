@@ -751,6 +751,10 @@ const { res, err, data } = await api.imagepress.v0.postInviteAccept({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.getInvites({
+  mine: {
+    type: Boolean
+    default: false
+  },
 })
 ```
 
@@ -781,6 +785,10 @@ const { res, err, data } = await api.imagepress.v0.getInvite({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.deleteInviteDecline({
+  inviteid: {
+    type: String
+    required: true
+  },
 })
 ```
 
