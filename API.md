@@ -623,10 +623,6 @@ const { res, err, data } = await api.imagepress.v0.getOrganization({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.deleteOrganization({
-  id: {
-    type: String
-    required: true
-  },
 })
 ```
 

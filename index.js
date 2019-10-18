@@ -521,9 +521,7 @@ validators['organization_get'] = async ({ path, method, body, mock }) => {
 }
 
 validators['organization_delete'] = async ({ path, method, body, mock }) => {
-  const props = {
-    id: { type: 'String', required: true }
-  }
+  const props = {}
 
   return validateProps(props, body, mock)
 }
