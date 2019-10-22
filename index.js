@@ -549,6 +549,12 @@ validators['organization_set'] = async ({ path, method, body, mock }) => {
   return r
 }
 
+validators['organization_leave'] = async ({ path, method, body, mock }) => {
+  const props = {}
+
+  return validateProps(props, body, mock)
+}
+
 validators['api_key_create'] = async ({ path, method, body, mock }) => {
   const props = {
     label: { type: 'String', required: true }
@@ -1027,6 +1033,18 @@ api.imagepress.v0.putOrganization = async body => {
   // Request
   const params = {
     method: 'PUT',
+    body
+  }
+
+  return fetch.request(path, params)
+}
+
+api.imagepress.v0.postOrganizationLeave = async body => {
+  const path = 'v0/organization/leave'
+
+  // Request
+  const params = {
+    method: 'POST',
     body
   }
 

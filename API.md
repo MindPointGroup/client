@@ -645,6 +645,13 @@ const { res, err, data } = await api.imagepress.v0.putOrganization({
 })
 ```
 
+### POST /v0/organization/leave
+
+```js
+const { res, err, data } = await api.imagepress.v0.postOrganizationLeave({
+})
+```
+
 ## api_key
 ### POST /v0/api_key/create
 
