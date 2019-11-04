@@ -3,6 +3,7 @@ const fetch = require('./fetch')
 const compile = require('./compile')
 const pkg = require('../package.json')
 const { spawnSync } = require('child_process')
+const GH_ACTION_RUN = !!process.env.GITHUB_WORKFLOW
 
 async function getRepos () {
   const params = {
@@ -32,11 +33,7 @@ async function getRepos () {
 async function getRepoSync (repo) {
   let exists = true
   let args = null
-  const opts = {
-    env: {
-      GIT_SSH_COMMAND: process.env.GITHUB_WORKFLOW && "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-    }
-  }
+  const opts = {}
 
   try {
     fs.statSync(`${__dirname}/../tmp/${repo.name}`)
@@ -54,10 +51,13 @@ async function getRepoSync (repo) {
 
     opts.cwd = `${__dirname}/../tmp/${repo.name}`
   } else {
+    const url = GH_ACTION_RUN ?
+          `https://defionscode:${process.env.TOKEN}@github.com/${pkg.config.org}/${repo.name}.git` :
+          `ssh://git@github.com/${pkg.config.org}/${repo.name}`
     args = [
       `clone`,
       `--depth=1`,
-      `ssh://git@github.com/${pkg.config.org}/${repo.name}`,
+      url,
       `tmp/${repo.name}`
     ]
   }
