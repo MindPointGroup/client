@@ -33,7 +33,9 @@ async function getRepoSync (repo) {
   let exists = true
   let args = null
   const opts = {
-    GIT_SSH_COMMAND: process.env.GITHUB_WORKFLOW && "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+    env: {
+      GIT_SSH_COMMAND: process.env.GITHUB_WORKFLOW && "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+    }
   }
 
   try {
