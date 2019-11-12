@@ -69,12 +69,6 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
     })
   }
 
-  if (!r.data.name && !r.data.id) {
-    return { err: { 'name, id': 'One is required' } }
-  }
-  if (r.data.name && r.data.id) {
-    return { err: { 'name, id': 'Both supplied. Only one is allowed.' } }
-  }
   if (r.data.reposList.length > 0) {
     r.data.reposList.map((repo, index) => {
       if (!repo.scripts) {
