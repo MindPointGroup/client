@@ -33,7 +33,7 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
     cloudcredentialid: { type: 'String', required: true },
     reposList: { type: 'Array', default: [] },
     subnetId: { type: 'String', required: true },
-    sourceid: { type: 'String', required: true },
+    sourceid: { type: 'String', required: false },
     regions: { type: 'Array', required: true },
     assignIp: { type: 'Boolean', default: true },
     permissions: { type: 'Object', required: false, default: { private: true, accounts: [] } },
@@ -53,6 +53,11 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
 
   if (mock || r.err) return r
 
+  if (!r.data.id) {
+    if (!r.data.sourceid) {
+      return { err: { 'sourceid': 'String required' } }
+    }
+  }
   if (typeof r.data.permissions.private !== 'boolean') {
     return { err: { 'permissions.private': 'Boolean required' } }
   }

@@ -86,7 +86,7 @@ const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({
   },
   sourceid: {
     type: String
-    required: true
+    required: false
   },
   regions: {
     type: Array
