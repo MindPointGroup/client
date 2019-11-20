@@ -28,12 +28,12 @@ validators['baseline_complete'] = async ({ path, method, body, mock }) => {
 
 validators['baseline_launch'] = async ({ path, method, body, mock }) => {
   const props = {
-    id: { type: 'String', required: false },
+    id: { type: 'String', required: false, match: uuidRegex() },
     name: { type: 'String', required: false },
-    cloudcredentialid: { type: 'String', required: true },
+    cloudcredentialid: { type: 'String', required: true, match: uuidRegex() },
     reposList: { type: 'Array', default: [] },
     subnetId: { type: 'String', required: true },
-    sourceid: { type: 'String', required: false },
+    sourceid: { type: 'String', required: false, match: uuidRegex() },
     regions: { type: 'Array', required: true },
     assignIp: { type: 'Boolean', default: true },
     permissions: { type: 'Object', required: false, default: { private: true, accounts: [] } },
@@ -56,6 +56,9 @@ validators['baseline_launch'] = async ({ path, method, body, mock }) => {
   if (!r.data.id) {
     if (!r.data.sourceid) {
       return { err: { 'sourceid': 'String required' } }
+    }
+    if (!r.data.permissions) {
+      return { err: { 'permissions': 'Object required' } }
     }
   }
   if (typeof r.data.permissions.private !== 'boolean') {
@@ -325,10 +328,6 @@ validators['repo_download'] = async ({ path, method, body, mock }) => {
 }
 
 validators['repo_upload'] = async ({ path, method, body, mock }) => {
-  if (!method === 'POST') {
-    return { err: { method: 'Must be POST' } }
-  }
-
   const match = new RegExp([
     'ap-south-1', 'eu-west-3', 'eu-west-2',
     'eu-west-1', 'ap-northeast-2', 'ap-northeast-1',
@@ -339,11 +338,11 @@ validators['repo_upload'] = async ({ path, method, body, mock }) => {
 
   const props = {
     repoUrl: { type: 'String', required: true },
-    id: { type: 'String', required: true }, // repo ref id
+    id: { type: 'String', required: true, match: uuidRegex() }, // repo ref id
     region: { type: 'String', required: true, match },
     tarArchive: { type: 'String', required: true },
     zipArchive: { type: 'String', required: true },
-    repoBranch: { type: 'String', default: 'HEAD' }
+    branch: { type: 'String', required: true }
   }
 
   return validateProps(props, body, mock)
@@ -355,62 +354,92 @@ validators['repo_list'] = async ({ path, method, body, mock }) => {
 
 validators['repo'] = async ({ path, method, body, mock }) => {
   const props = {
-    id: { type: 'String' }
+    id: { type: 'String', required: false },
+    status: { type: 'String', required: false },
+    sync: { type: 'Boolean', default: false },
+    name: { type: 'String', required: false },
+    url: { type: 'String', required: false },
+    cloudcredentialid: { type: 'String', required: false },
+    region: { type: 'String', required: false },
+    subnetId: { type: 'String', required: false },
+    assignIp: { type: 'Boolean', default: false },
+    gitcredentialid: { type: 'String', required: false },
+    token: { type: 'String', required: false },
+    fileList: { type: 'Array', required: false, default: [] },
+    branch: { type: 'String', required: false }
   }
 
-  if (method === 'POST') {
-    props.status = { type: 'String', required: false }
+  if (method === 'GET') {
+    props.id.required = true
   }
 
-  if (method === 'POST' && body.status !== 'failed') {
-    if (body.noWorker !== true) {
-      props.token = { type: 'String', required: true }
-    }
-    props.noWorker = { type: 'Boolean', default: false }
-    props.fileList = { type: 'Array', default: [] }
-    props.branch = { type: 'String', required: false }
-    if (!body.id) {
-      props.name = { type: 'String', required: true }
-      props.url = { type: 'String', required: true }
-      props.cloudcredentialid = { type: 'String', required: true }
-      props.gitcredentialid = { type: 'String', required: false }
-      props.assignIp = { type: 'Boolean', default: false }
-      props.subnetId = { type: 'String', required: true }
-      props.region = { type: 'String', required: true }
-    }
-  }
+  const r = validateProps(props, body, mock)
+  if (mock) return r
 
-  return validateProps(props, body, mock)
+  if (!r.data.id) {
+    r.data.sync = true
+    const requiredProps = [
+      'token',
+      'cloudcredentialid',
+      'name',
+      'branch',
+      'assignIp',
+      'subnetId'
+    ]
+    requiredProps.map(prop => {
+      if (!r.data[prop]) {
+        const err = {}
+        err[prop] = 'property required'
+        return { err }
+      }
+    })
+  }
+  return r
 }
 
 validators['repo'] = async ({ path, method, body, mock }) => {
   const props = {
-    id: { type: 'String' }
+    id: { type: 'String', required: false },
+    status: { type: 'String', required: false },
+    sync: { type: 'Boolean', default: false },
+    name: { type: 'String', required: false },
+    url: { type: 'String', required: false },
+    cloudcredentialid: { type: 'String', required: false },
+    region: { type: 'String', required: false },
+    subnetId: { type: 'String', required: false },
+    assignIp: { type: 'Boolean', default: false },
+    gitcredentialid: { type: 'String', required: false },
+    token: { type: 'String', required: false },
+    fileList: { type: 'Array', required: false, default: [] },
+    branch: { type: 'String', required: false }
   }
 
-  if (method === 'POST') {
-    props.status = { type: 'String', required: false }
+  if (method === 'GET') {
+    props.id.required = true
   }
 
-  if (method === 'POST' && body.status !== 'failed') {
-    if (body.noWorker !== true) {
-      props.token = { type: 'String', required: true }
-    }
-    props.noWorker = { type: 'Boolean', default: false }
-    props.fileList = { type: 'Array', default: [] }
-    props.branch = { type: 'String', required: false }
-    if (!body.id) {
-      props.name = { type: 'String', required: true }
-      props.url = { type: 'String', required: true }
-      props.cloudcredentialid = { type: 'String', required: true }
-      props.gitcredentialid = { type: 'String', required: false }
-      props.assignIp = { type: 'Boolean', default: false }
-      props.subnetId = { type: 'String', required: true }
-      props.region = { type: 'String', required: true }
-    }
-  }
+  const r = validateProps(props, body, mock)
+  if (mock) return r
 
-  return validateProps(props, body, mock)
+  if (!r.data.id) {
+    r.data.sync = true
+    const requiredProps = [
+      'token',
+      'cloudcredentialid',
+      'name',
+      'branch',
+      'assignIp',
+      'subnetId'
+    ]
+    requiredProps.map(prop => {
+      if (!r.data[prop]) {
+        const err = {}
+        err[prop] = 'property required'
+        return { err }
+      }
+    })
+  }
+  return r
 }
 
 validators['repo_delete'] = async ({ path, method, body, mock }) => {
@@ -442,7 +471,7 @@ validators['source_delete'] = async ({ path, method, body, mock }) => {
     id: {
       type: 'String',
       required: true,
-      resolve: value => value.length <= 128
+      match: uuidRegex()
     }
   }
 
@@ -461,11 +490,10 @@ validators['source_update'] = async ({ path, method, body, mock }) => {
 
 validators['source_import'] = async ({ path, method, body, mock }) => {
   const props = {
-    id: { type: 'String', required: false },
     name: { type: 'String', required: true },
-    cloudcredentialid: { type: 'String', required: true },
+    cloudcredentialid: { type: 'String', required: true, match: uuidRegex() },
     imageId: { type: 'String' },
-    provider: { type: 'String', default: 'aws' }
+    provider: { type: 'String', default: 'aws', match: /^aws$/ }
   }
 
   props.region = { type: 'String', default: 'us-east-1' }
@@ -482,7 +510,7 @@ validators['image_verify'] = async ({ path, method, body, mock }) => {
   const props = {
     imageId: { type: 'String', required: true },
     region: { type: 'String', required: true },
-    id: { type: 'String', required: true }
+    id: { type: 'String', required: true, match: uuidRegex() } // credential id
   }
 
   return validateProps(props, body, mock)
@@ -599,12 +627,6 @@ validators['user_role'] = async ({ path, method, body, mock }) => {
     id: { type: 'String', required: true }, // userid of user being modified
     roleid: { type: 'Number', required: true }
   }
-
-  return validateProps(props, body, mock)
-}
-
-validators['user_leave'] = async ({ path, method, body, mock }) => {
-  const props = {}
 
   return validateProps(props, body, mock)
 }
@@ -1112,18 +1134,6 @@ api.imagepress.v0.getUsers = async body => {
 
 api.imagepress.v0.postUserRole = async body => {
   const path = 'v0/user/role'
-
-  // Request
-  const params = {
-    method: 'POST',
-    body
-  }
-
-  return fetch.request(path, params)
-}
-
-api.imagepress.v0.postUserLeave = async body => {
-  const path = 'v0/user/leave'
 
   // Request
   const params = {

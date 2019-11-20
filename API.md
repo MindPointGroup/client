@@ -67,6 +67,7 @@ const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({
   id: {
     type: String
     required: false
+    match: /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
   },
   name: {
     type: String
@@ -75,6 +76,7 @@ const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({
   cloudcredentialid: {
     type: String
     required: true
+    match: /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
   },
   reposList: {
     type: Array
@@ -87,6 +89,7 @@ const { res, err, data } = await api.imagepress.v0.postBaselineLaunch({
   sourceid: {
     type: String
     required: false
+    match: /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
   },
   regions: {
     type: Array
@@ -379,6 +382,7 @@ const { res, err, data } = await api.imagepress.v0.postRepoUpload({
   id: {
     type: String
     required: true
+    match: /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
   },
   region: {
     type: String
@@ -393,9 +397,9 @@ const { res, err, data } = await api.imagepress.v0.postRepoUpload({
     type: String
     required: true
   },
-  repoBranch: {
+  branch: {
     type: String
-    default: HEAD
+    required: true
   },
 })
 ```
@@ -413,6 +417,56 @@ const { res, err, data } = await api.imagepress.v0.getRepoList({
 const { res, err, data } = await api.imagepress.v0.getRepo({
   id: {
     type: String
+    required: false
+  },
+  status: {
+    type: String
+    required: false
+  },
+  sync: {
+    type: Boolean
+    default: false
+  },
+  name: {
+    type: String
+    required: false
+  },
+  url: {
+    type: String
+    required: false
+  },
+  cloudcredentialid: {
+    type: String
+    required: false
+  },
+  region: {
+    type: String
+    required: false
+  },
+  subnetId: {
+    type: String
+    required: false
+  },
+  assignIp: {
+    type: Boolean
+    default: false
+  },
+  gitcredentialid: {
+    type: String
+    required: false
+  },
+  token: {
+    type: String
+    required: false
+  },
+  fileList: {
+    type: Array
+    required: false
+    default: 
+  },
+  branch: {
+    type: String
+    required: false
   },
 })
 ```
@@ -423,40 +477,33 @@ const { res, err, data } = await api.imagepress.v0.getRepo({
 const { res, err, data } = await api.imagepress.v0.postRepo({
   id: {
     type: String
+    required: false
   },
   status: {
     type: String
     required: false
   },
-  token: {
-    type: String
-    required: true
-  },
-  noWorker: {
+  sync: {
     type: Boolean
     default: false
   },
-  fileList: {
-    type: Array
-    default: 
-  },
-  branch: {
+  name: {
     type: String
     required: false
   },
-  name: {
-    type: String
-    required: true
-  },
   url: {
     type: String
-    required: true
+    required: false
   },
   cloudcredentialid: {
     type: String
-    required: true
+    required: false
   },
-  gitcredentialid: {
+  region: {
+    type: String
+    required: false
+  },
+  subnetId: {
     type: String
     required: false
   },
@@ -464,13 +511,22 @@ const { res, err, data } = await api.imagepress.v0.postRepo({
     type: Boolean
     default: false
   },
-  subnetId: {
+  gitcredentialid: {
     type: String
-    required: true
+    required: false
   },
-  region: {
+  token: {
     type: String
-    required: true
+    required: false
+  },
+  fileList: {
+    type: Array
+    required: false
+    default: 
+  },
+  branch: {
+    type: String
+    required: false
   },
 })
 ```
@@ -513,7 +569,7 @@ const { res, err, data } = await api.imagepress.v0.deleteSource({
   id: {
     type: String
     required: true
-    resolve: value => value.length <= 128
+    match: /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
   },
 })
 ```
@@ -541,10 +597,6 @@ const { res, err, data } = await api.imagepress.v0.putSource({
 
 ```js
 const { res, err, data } = await api.imagepress.v0.postSource({
-  id: {
-    type: String
-    required: false
-  },
   name: {
     type: String
     required: true
@@ -552,6 +604,7 @@ const { res, err, data } = await api.imagepress.v0.postSource({
   cloudcredentialid: {
     type: String
     required: true
+    match: /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
   },
   imageId: {
     type: String
@@ -560,6 +613,7 @@ const { res, err, data } = await api.imagepress.v0.postSource({
   provider: {
     type: String
     default: aws
+    match: /^aws$/
   },
   region: {
     type: String
@@ -584,6 +638,7 @@ const { res, err, data } = await api.imagepress.v0.getImageVerify({
   id: {
     type: String
     required: true
+    match: /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
   },
 })
 ```
@@ -716,13 +771,6 @@ const { res, err, data } = await api.imagepress.v0.postUserRole({
     type: Number
     required: true
   },
-})
-```
-
-### POST /v0/user/leave
-
-```js
-const { res, err, data } = await api.imagepress.v0.postUserLeave({
 })
 ```
 
